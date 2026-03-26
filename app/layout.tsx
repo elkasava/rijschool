@@ -14,7 +14,7 @@ const inter = Inter({
 const siteUrl = "https://rij2go.nl";
 const siteName = "Rijschool Rij2Go";
 const description =
-  "Rijschool Rij2Go biedt kwalitatieve rijlessen in Amsterdam, Zaandam en Almere. Persoonlijke aandacht, 96% slagingspercentage en moderne lesauto's. Boek nu je gratis proefles!";
+  "Rijschool Rij2Go biedt kwalitatieve rijlessen in Amsterdam, Zaandam en Almere. Persoonlijke aandacht, moderne lesauto's en flexibele planning. Schrijf je vandaag nog in!";
 
 const jsonLd = [
   {
@@ -44,14 +44,6 @@ const jsonLd = [
       "@type": "OfferCatalog",
       name: "Rijpakketten",
       itemListElement: [
-        {
-          "@type": "Offer",
-          name: "Proefles",
-          price: "50",
-          priceCurrency: "EUR",
-          availability: "https://schema.org/InStock",
-          url: `${siteUrl}/#contact`,
-        },
         {
           "@type": "Offer",
           name: "Pakket B – Meest gekozen",
@@ -90,10 +82,10 @@ const jsonLd = [
     availableLanguage: ["nl", "ar", "fr"],
     offers: {
       "@type": "Offer",
-      price: "50",
+      price: "680",
       priceCurrency: "EUR",
-      name: "Proefles – vrijblijvend kennismaken",
-      url: `${siteUrl}/#contact`,
+      name: "Start Snel – 10 rijlessen",
+      url: `${siteUrl}/#pakketten`,
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -122,7 +114,6 @@ export const metadata: Metadata = {
     "rijschool Amsterdam",
     "rijlessen Amsterdam",
     "rijbewijs halen",
-    "proefles rijschool",
     "rijschool Zaandam",
     "rijschool Almere",
     "autorijden leren",

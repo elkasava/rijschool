@@ -6,7 +6,6 @@ import Hero from "@/components/Hero";
 const Voordelen = dynamic(() => import("@/components/Voordelen"));
 const SpecialeBegeleiding = dynamic(() => import("@/components/SpecialeBegeleiding"));
 const Pakketten = dynamic(() => import("@/components/Pakketten"));
-const Instructeurs = dynamic(() => import("@/components/Instructeurs"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const Werkwijze = dynamic(() => import("@/components/Werkwijze"));
 const CtaBanner = dynamic(() => import("@/components/CtaBanner"));
@@ -23,9 +22,6 @@ export default function Home() {
       <Voordelen />
       <SpecialeBegeleiding />
       <Pakketten />
-      <div className="hidden md:block">
-        <Instructeurs />
-      </div>
       <Testimonials />
       <Werkwijze />
       <CtaBanner />

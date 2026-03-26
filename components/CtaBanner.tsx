@@ -61,7 +61,7 @@ export default function CtaBanner() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 overflow-hidden"
+      className="relative py-12 sm:py-20 overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #4f46e5 100%)",
         backgroundSize: "200% 200%",
@@ -102,7 +102,7 @@ export default function CtaBanner() {
             ref={line2Ref}
             style={{ opacity: 0, display: "block" }}
           >
-            één proefles
+            één rijles
           </span>
         </h2>
 
@@ -129,7 +129,7 @@ export default function CtaBanner() {
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Proefles aanvragen
+            Rijles aanvragen
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           <a

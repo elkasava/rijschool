@@ -73,7 +73,7 @@ export default function Voordelen() {
   const [v0, v1, v2, v3] = voordelen;
 
   return (
-    <section ref={sectionRef} className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
+    <section ref={sectionRef} className="relative py-12 sm:py-20 lg:py-28 bg-slate-50 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <Image src="/polo.webp" alt="" fill sizes="100vw" className="object-cover" />
@@ -82,7 +82,7 @@ export default function Voordelen() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header — left + right split */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 sm:mb-14 gap-4 sm:gap-6">
           <div>
             <span
               ref={subLabelRef}
@@ -121,7 +121,7 @@ export default function Voordelen() {
             <div
               data-card
               style={{ opacity: 0 }}
-              className="md:col-span-2 bg-slate-900 rounded-3xl p-8 lg:p-10 relative overflow-hidden group"
+              className="md:col-span-2 bg-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden group"
             >
               <div className="absolute -top-12 -right-12 w-56 h-56 bg-brand-400/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-40 h-40 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
@@ -187,7 +187,7 @@ export default function Voordelen() {
             <div
               data-card
               style={{ opacity: 0 }}
-              className="md:col-span-2 bg-brand-600 rounded-3xl p-8 lg:p-10 relative overflow-hidden group"
+              className="md:col-span-2 bg-brand-600 rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden group"
             >
               <div className="absolute -bottom-10 -right-10 w-52 h-52 bg-white/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute top-0 left-1/2 w-64 h-32 bg-brand-400/30 rounded-full blur-3xl pointer-events-none" />

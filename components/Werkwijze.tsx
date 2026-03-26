@@ -151,19 +151,19 @@ export default function Werkwijze() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="werkwijze" className="py-20 lg:py-28 bg-slate-900">
+    <section ref={sectionRef} id="werkwijze" className="py-12 sm:py-20 lg:py-28 bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
           ref={headerRef}
           style={{ opacity: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <span className="inline-block text-brand-400 font-semibold text-sm uppercase tracking-widest mb-3">
             Onze werkwijze
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Van proefles tot rijbewijs
+            Van eerste les tot rijbewijs
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Een duidelijk en bewezen stappenplan dat jou zo efficiënt mogelijk

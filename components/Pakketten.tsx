@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { m, useReducedMotion } from "framer-motion";
 import { Check, Sparkles, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import contentData from "@/data/content.json";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
@@ -221,14 +222,14 @@ export default function Pakketten() {
   };
 
   return (
-    <section ref={sectionRef} id="pakketten" className="py-20 lg:py-28 bg-white">
+    <section ref={sectionRef} id="pakketten" className="py-12 sm:py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div
           ref={headerRef}
           style={{ opacity: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
             Rijpakketten
@@ -238,7 +239,7 @@ export default function Pakketten() {
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
             Transparante prijzen zonder verborgen kosten. Hoe meer lessen, hoe groter de korting.
-            Twijfel je? Vraag eerst een proefles aan.
+            Twijfel je? Neem contact op voor persoonlijk advies.
           </p>
         </div>
 
@@ -418,7 +419,7 @@ export default function Pakketten() {
                     </div>
 
                     {/* CTA */}
-                    <div className="px-6 pb-6 bg-white">
+                    <div className="px-6 pb-5 bg-white">
                       <m.div
                         whileHover={prefersReduced ? undefined : scaleTap.whileHover}
                         whileTap={prefersReduced ? undefined : scaleTap.whileTap}
@@ -439,6 +440,14 @@ export default function Pakketten() {
                           {pakket.cta}
                         </Button>
                       </m.div>
+                      <p className="text-center mt-3">
+                        <Link
+                          href="/algemene-voorwaarden"
+                          className="text-slate-400 hover:text-brand-600 text-[11px] underline underline-offset-2 transition-colors"
+                        >
+                          Algemene voorwaarden
+                        </Link>
+                      </p>
                     </div>
                   </m.div>
                 </div>
@@ -484,7 +493,7 @@ export default function Pakketten() {
         <div
           ref={tariefRef}
           style={{ opacity: 0 }}
-          className="mt-16"
+          className="mt-10 sm:mt-16"
         >
           <div className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden">
             {/* Mobile: collapsible header */}
@@ -532,7 +541,14 @@ export default function Pakketten() {
 
         {/* Bottom note */}
         <p className="text-center text-slate-400 text-sm mt-8">
-          Alle pakketten zijn inclusief CBR-praktijkexamen. Maatwerk mogelijk — neem contact op voor persoonlijk advies.
+          Maatwerk mogelijk — neem contact op voor persoonlijk advies.{" "}
+          <Link
+            href="/algemene-voorwaarden"
+            className="underline underline-offset-2 hover:text-brand-600 transition-colors"
+          >
+            Bekijk onze algemene voorwaarden
+          </Link>
+          .
         </p>
       </div>
     </section>

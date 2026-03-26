@@ -38,7 +38,7 @@ export default function SpecialeBegeleiding() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section className="py-12 sm:py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -47,7 +47,7 @@ export default function SpecialeBegeleiding() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
             Voor iedereen

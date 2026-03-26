@@ -21,11 +21,10 @@ import { registerGsap, gsap } from "@/lib/gsap";
 const { telefoon, telefoonLink, email, werkgebied, openingstijden, schoolNaam, whatsapp } = siteContent.algemeen;
 
 const interesseOpties = [
-  "Proefles",
   "Start Snel",
   ...siteContent.pakketten
     .map((p: { name: string }) => p.name)
-    .filter((name: string) => name !== "Proefles" && name !== "Start Snel"),
+    .filter((name: string) => name !== "Start Snel"),
 ];
 
 const contactInfo = [
@@ -68,7 +67,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-  const [interesse, setInteresse] = useState("Proefles");
+  const [interesse, setInteresse] = useState("Start Snel");
 
   const prefersReduced = useReducedMotion();
   const [formScope, animateShake] = useAnimate();
@@ -260,13 +259,13 @@ export default function Contact() {
   );
 
   return (
-    <section ref={sectionRef} id="contact" className="py-20 lg:py-28 bg-white">
+    <section ref={sectionRef} id="contact" className="py-12 sm:py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
           ref={headerRef}
           style={{ opacity: 0 }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
             Contact
@@ -275,7 +274,7 @@ export default function Contact() {
             Begin vandaag nog
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Vraag je proefles aan of stel gerust een vraag. We nemen
+            Stel gerust een vraag of schrijf je in voor een pakket. We nemen
             binnen 24 uur contact met je op.
           </p>
         </div>
@@ -334,8 +333,8 @@ export default function Contact() {
               {/* Trust statements */}
               <div className="mt-10 pt-8 border-t border-slate-800 flex flex-col gap-4">
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  <span className="text-white font-semibold">Proefles —</span>{" "}
-                  Geen verplichtingen. Maak gewoon vrijblijvend kennis met je instructeur en ontdek of het klikt.
+                  <span className="text-white font-semibold">Persoonlijk advies —</span>{" "}
+                  Niet zeker welk pakket bij jou past? Stuur een berichtje en we helpen je op weg.
                 </p>
                 <p className="text-slate-300 text-sm leading-relaxed">
                   <span className="text-white font-semibold">Snel antwoord —</span>{" "}

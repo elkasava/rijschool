@@ -43,10 +43,10 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="reviews" className="py-20 lg:py-28 bg-slate-50">
+    <section ref={sectionRef} id="reviews" className="py-12 sm:py-20 lg:py-28 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div ref={headerRef} style={{ opacity: 0 }} className="text-center mb-14">
+        <div ref={headerRef} style={{ opacity: 0 }} className="text-center mb-8 sm:mb-14">
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
             Ervaringen
           </span>

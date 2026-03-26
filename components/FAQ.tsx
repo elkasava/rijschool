@@ -92,12 +92,12 @@ export default function FAQ() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="faq" className="py-20 lg:py-28 bg-slate-50">
+    <section ref={sectionRef} id="faq" className="py-12 sm:py-20 lg:py-28 bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
           ref={headerRef}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <span
             style={{ opacity: 0 }}

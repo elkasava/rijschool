@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 import { m, useReducedMotion } from "framer-motion";
 import { scaleTap } from "@/lib/motion-presets";
-import { ArrowRight, Star, CheckCircle2, TrendingUp, Users, MapPin } from "lucide-react";
+import { ArrowRight, Star, CheckCircle2, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import content from "@/data/content.json";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const { stats, beoordeling, subtext, checkmarks } = content.hero;
+const { beoordeling, subtext, checkmarks } = content.hero;
 const { werkgebied } = content.algemeen;
 
 export default function Hero() {
@@ -19,7 +19,6 @@ export default function Hero() {
   const checklistRef = useRef<HTMLUListElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   // Defer video load until after LCP — avoids blocking critical resources
   useEffect(() => {
@@ -107,13 +106,6 @@ export default function Hero() {
         "-=0.7"
       );
 
-      // Stats bar
-      tl.fromTo(
-        statsRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7 },
-        "-=0.5"
-      );
     });
 
     return () => ctx.revert();
@@ -183,7 +175,7 @@ export default function Hero() {
             <h1
               ref={headlineRef}
               style={{ opacity: 0 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+              className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6"
             >
               Haal je rijbewijs{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-200">
@@ -195,7 +187,7 @@ export default function Hero() {
             <p
               ref={subRef}
               style={{ opacity: 0 }}
-              className="text-slate-400 text-lg sm:text-xl leading-relaxed mb-8 max-w-lg"
+              className="text-slate-400 text-base sm:text-xl leading-relaxed mb-6 sm:mb-8 max-w-lg"
             >
               {subtext}
             </p>
@@ -233,7 +225,7 @@ export default function Hero() {
                   onClick={() => scrollTo("#contact")}
                   className="bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/25 hover:shadow-brand-400/40 transition-all duration-300 group"
                 >
-                  Proefles Aanvragen
+                  Rijles Aanvragen
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </m.div>
@@ -280,25 +272,11 @@ export default function Hero() {
                   <div className="text-slate-400 text-xs mt-0.5">Gemiddelde beoordeling</div>
                 </div>
 
-                {/* Stats grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-slate-900 rounded-2xl p-4 text-center">
-                    <TrendingUp className="w-5 h-5 text-brand-400 mx-auto mb-1" />
-                    <div className="text-xl font-bold text-white">96%</div>
-                    <div className="text-slate-400 text-xs mt-0.5">Slagingspercentage</div>
-                  </div>
-                  <div className="bg-slate-900 rounded-2xl p-4 text-center">
-                    <Users className="w-5 h-5 text-brand-400 mx-auto mb-1" />
-                    <div className="text-xl font-bold text-white">2.000+</div>
-                    <div className="text-slate-400 text-xs mt-0.5">Tevreden leerlingen</div>
-                  </div>
-                </div>
-
                 {/* Areas */}
                 <div className="bg-slate-900 rounded-2xl px-4 py-3 flex flex-wrap gap-2">
                   {werkgebied.split(", ").map((city) => (
                     <span key={city} className="flex items-center gap-1 px-2.5 py-1 bg-brand-600 rounded-full text-white text-xs font-medium">
-                      <MapPin className="w-3 h-3" />{city.replace(" & ", "")}
+                      <MapPin className="w-3 h-3" />{city.trim()}
                     </span>
                   ))}
                 </div>
@@ -319,21 +297,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Stats bar */}
-        <div
-          ref={statsRef}
-          style={{ opacity: 0 }}
-          className="mt-16 grid grid-cols-3 gap-4 border-t border-slate-800 pt-10"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                {stat.value}
-              </div>
-              <div className="text-slate-500 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Scroll indicator */}
