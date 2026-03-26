@@ -309,22 +309,16 @@ export default function Contact() {
                 })}
               </div>
 
-              {/* Trust badges */}
-              <div className="mt-10 pt-8 border-t border-slate-800 grid grid-cols-2 gap-4">
-                {[
-                  { label: "CBR Erkend", sub: "Officieel gecertificeerd" },
-                  { label: "96% Geslaagd", sub: "Boven het landelijk gem." },
-                  { label: "Proefles", sub: "Vrijblijvend kennismaken" },
-                  { label: "Snel reageren", sub: "Binnen 24 uur contact" },
-                ].map((badge) => (
-                  <div key={badge.label} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                    <div>
-                      <p className="text-white text-xs font-semibold">{badge.label}</p>
-                      <p className="text-slate-500 text-xs">{badge.sub}</p>
-                    </div>
-                  </div>
-                ))}
+              {/* Trust statements */}
+              <div className="mt-10 pt-8 border-t border-slate-800 flex flex-col gap-4">
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  <span className="text-white font-semibold">Proefles —</span>{" "}
+                  Geen verplichtingen. Maak gewoon vrijblijvend kennis met je instructeur en ontdek of het klikt.
+                </p>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  <span className="text-white font-semibold">Snel antwoord —</span>{" "}
+                  Stuur je bericht en we nemen binnen 24 uur contact op. Vaak al binnen een uur.
+                </p>
               </div>
             </div>
           </div>
