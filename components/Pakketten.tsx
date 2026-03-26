@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { m, useReducedMotion } from "framer-motion";
-import { Check, Sparkles, Tag, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, Sparkles, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { track } from "@vercel/analytics";
 import contentData from "@/data/content.json";
@@ -203,6 +203,7 @@ export default function Pakketten() {
     return () => ctx.revert();
   }, []);
 
+  const [tarievenOpen, setTarievenOpen] = useState(false);
   const prefersReduced = useReducedMotion();
 
   const slide = (dir: "prev" | "next") => {
@@ -486,13 +487,30 @@ export default function Pakketten() {
           className="mt-16"
         >
           <div className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden">
-            <div className="px-6 py-5 border-b border-slate-100">
+            {/* Mobile: collapsible header */}
+            <button
+              className="sm:hidden w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+              onClick={() => setTarievenOpen((o) => !o)}
+              aria-expanded={tarievenOpen}
+            >
+              <div>
+                <h3 className="text-slate-900 font-bold text-lg">Losse tarieven</h3>
+                <p className="text-slate-500 text-sm mt-0.5">
+                  Individuele lessen, examens en toetsen — zonder pakket.
+                </p>
+              </div>
+              <ChevronDown
+                className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-200 ${tarievenOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            {/* Desktop: always-visible header */}
+            <div className="hidden sm:block px-6 py-5 border-b border-slate-100">
               <h3 className="text-slate-900 font-bold text-lg">Losse tarieven</h3>
               <p className="text-slate-500 text-sm mt-0.5">
                 Individuele lessen, examens en toetsen — zonder pakket.
               </p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 divide-x divide-y sm:divide-y-0 divide-slate-100">
+            <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 divide-x divide-y sm:divide-y-0 divide-slate-100 ${tarievenOpen ? "" : "hidden sm:grid"}`}>
               {losseTarieven.map((t, i) => (
                 <div
                   key={t.label}

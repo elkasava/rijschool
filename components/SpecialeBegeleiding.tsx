@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { m } from "framer-motion";
 import {
   Brain,
   HeartHandshake,
   Settings2,
   Globe,
+  ChevronDown,
   type LucideIcon,
 } from "lucide-react";
 import content from "@/data/content.json";
@@ -33,6 +35,8 @@ const itemVariants = {
 };
 
 export default function SpecialeBegeleiding() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,31 +69,59 @@ export default function SpecialeBegeleiding() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8"
         >
-          {items.map((item) => {
+          {items.map((item, i) => {
             const { Icon } = item;
+            const isOpen = openIndex === i;
             return (
               <m.div
                 key={item.title}
                 variants={itemVariants}
-                className={`group relative rounded-2xl border ${item.border} ${item.bg} p-8 flex gap-6 items-start hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5`}
+                className={`group relative rounded-2xl border ${item.border} ${item.bg} overflow-hidden`}
               >
-                {/* Icon */}
-                <div className={`flex-shrink-0 w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center border ${item.border}`}>
-                  <Icon className={`w-7 h-7 ${item.color}`} />
-                </div>
-
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                  {/* Tag */}
-                  <span className={`inline-block text-xs font-semibold ${item.color} mb-2`}>
-                    {item.tag}
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                {/* Mobile: tappable header row */}
+                <button
+                  className="sm:hidden w-full flex items-center gap-4 p-6 text-left"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                >
+                  <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center border ${item.border}`}>
+                    <Icon className={`w-6 h-6 ${item.color}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className={`inline-block text-xs font-semibold ${item.color} mb-0.5`}>
+                      {item.tag}
+                    </span>
+                    <h3 className="text-base font-bold text-slate-900 leading-snug">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <ChevronDown
+                    className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {/* Mobile: expandable description */}
+                {isOpen && (
+                  <p className="sm:hidden text-slate-600 text-sm leading-relaxed px-6 pb-5">
                     {item.description}
                   </p>
+                )}
+
+                {/* Desktop: full card always visible */}
+                <div className="hidden sm:flex gap-6 items-start p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
+                  <div className={`flex-shrink-0 w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center border ${item.border}`}>
+                    <Icon className={`w-7 h-7 ${item.color}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className={`inline-block text-xs font-semibold ${item.color} mb-2`}>
+                      {item.tag}
+                    </span>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </m.div>
             );

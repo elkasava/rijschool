@@ -23,7 +23,9 @@ export default function Home() {
       <Voordelen />
       <SpecialeBegeleiding />
       <Pakketten />
-      <Instructeurs />
+      <div className="hidden md:block">
+        <Instructeurs />
+      </div>
       <Testimonials />
       <Werkwijze />
       <CtaBanner />

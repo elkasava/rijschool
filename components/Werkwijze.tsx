@@ -221,10 +221,10 @@ export default function Werkwijze() {
                         <ArrowRight className="w-4 h-4 text-slate-600 hidden lg:block" />
                       )}
                     </div>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                    <p className="hidden sm:block text-slate-400 text-sm leading-relaxed mb-4">
                       {stap.description}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="hidden sm:flex flex-wrap gap-2">
                       {stap.details.map((detail) => (
                         <span
                           key={detail}
