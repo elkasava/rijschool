@@ -39,13 +39,6 @@ const nextConfig = {
           { key: "Accept-Ranges", value: "bytes" },
         ],
       },
-      // Immutable static assets — 1 year
-      {
-        source: "/_next/static/(.*)",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
-      },
       // Public assets (logo, images) — 7 days + stale-while-revalidate
       {
         source: "/(.*\\.(?:png|jpg|jpeg|webp|avif|svg|ico|woff2?))",
@@ -53,16 +46,6 @@ const nextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=604800, stale-while-revalidate=86400",
-          },
-        ],
-      },
-      // HTML pages — always revalidate, serve stale for 1 day while fetching fresh
-      {
-        source: "/((?!_next|api).*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
           },
         ],
       },
