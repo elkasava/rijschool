@@ -17,3 +17,5 @@ public/hero-video.mp4
 .DS_Store
 *.pem
 npm-debug.log*
+
+.vercel

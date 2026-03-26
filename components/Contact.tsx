@@ -33,7 +33,7 @@ const contactInfo = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ naam: "", email: "", telefoon: "", bericht: "" });
+  const [form, setForm] = useState({ naam: "", email: "", telefoon: "", bericht: "", datum: "", tijd: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [interesse, setInteresse] = useState("Proefles");
 
@@ -160,8 +160,9 @@ export default function Contact() {
       `Naam: ${form.naam}\n` +
       `E-mail: ${form.email}\n` +
       `Telefoon: ${form.telefoon || "niet opgegeven"}\n` +
-      `Interesse: ${interesse}\n\n` +
-      `Bericht:\n${form.bericht}`;
+      `Interesse: ${interesse}\n` +
+      (form.datum ? `Gewenste datum: ${form.datum}${form.tijd ? ` om ${form.tijd}` : ""}\n` : "") +
+      `\nBericht:\n${form.bericht}`;
     const encoded = encodeURIComponent(msg);
     window.open(`https://wa.me/${whatsapp}?text=${encoded}`, "_blank");
     setStatus("sent");
@@ -331,6 +332,41 @@ export default function Contact() {
                       placeholder="06-1234 5678"
                       className="bg-white border-slate-200 focus-visible:ring-brand-500"
                     />
+                  </div>
+
+                  {/* Date + Time */}
+                  <div data-field style={{ opacity: 0 }} className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="datum" className="block text-sm font-medium text-slate-700 mb-1.5">
+                        Gewenste datum
+                      </label>
+                      <Input
+                        id="datum"
+                        name="datum"
+                        type="date"
+                        value={form.datum}
+                        onChange={handleChange}
+                        min={new Date().toISOString().split("T")[0]}
+                        className="bg-white border-slate-200 focus-visible:ring-brand-500"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="tijd" className="block text-sm font-medium text-slate-700 mb-1.5">
+                        Gewenste tijd
+                      </label>
+                      <select
+                        id="tijd"
+                        name="tijd"
+                        value={form.tijd}
+                        onChange={(e) => setForm({ ...form, tijd: e.target.value })}
+                        className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+                      >
+                        <option value="">Kies tijd</option>
+                        {["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"].map((t) => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
 
                   {/* Message */}

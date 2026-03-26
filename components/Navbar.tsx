@@ -13,7 +13,8 @@ const { schoolNaam, telefoon, telefoonLink, whatsapp } = content.algemeen;
 
 const navLinks = [
   { label: "Pakketten", href: "#pakketten", isPage: false },
-  { label: "Werkwijze", href: "#werkwijze", isPage: false },
+  { label: "Instructeurs", href: "#instructeurs", isPage: false },
+  { label: "Reviews", href: "#reviews", isPage: false },
   { label: "Online Praktijk", href: "/oefentheorie", isPage: true },
   { label: "Contact", href: "#contact", isPage: false },
 ];

@@ -258,6 +258,70 @@
       "border": "border-emerald-100"
     }
   ],
+  "instructeurs": [
+    {
+      "naam": "Youssef El Mouloudi",
+      "titel": "Senior Rij-instructeur & Eigenaar",
+      "ervaring": "12 jaar",
+      "talen": ["Nederlands", "Engels", "Arabisch"],
+      "specialisaties": ["ADHD & Autisme", "Rijangst", "Automaat rijbewijs"],
+      "beschrijving": "Youssef begon als rij-instructeur omdat hij gelooft dat iedereen, ongeacht achtergrond of uitdaging, kan leren rijden. Met meer dan 12 jaar ervaring heeft hij honderden leerlingen begeleid — van beginners tot mensen die al meerdere keren waren gezakt. Zijn rustige aanpak en heldere uitleg maken hem bijzonder populair bij leerlingen met rijangst of ADHD.",
+      "stats": { "leerlingen": "800+", "slagingspercentage": "97%" }
+    },
+    {
+      "naam": "Fatima Zahra Idrissi",
+      "titel": "Rij-instructeur",
+      "ervaring": "6 jaar",
+      "talen": ["Nederlands", "Engels", "Frans"],
+      "specialisaties": ["Vrouwelijke leerlingen", "Examentraining", "Handgeschakeld"],
+      "beschrijving": "Fatima staat bekend om haar geduld en structurele aanpak. Ze werkt intensief aan examentraining en weet precies waar het CBR op let. Veel van haar leerlingen slagen al bij de eerste poging. Ze spreekt vloeiend Nederlands, Engels en Frans.",
+      "stats": { "leerlingen": "400+", "slagingspercentage": "95%" }
+    }
+  ],
+  "testimonials": [
+    {
+      "naam": "Selin A.",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Pakket B",
+      "tekst": "Na twee mislukte pogingen bij een andere rijschool probeerde ik Rij2Go. Wat een verschil! Youssef legde alles rustig uit en had veel geduld. Na 20 lessen ben ik in één keer geslaagd. Absoluut aanraden!"
+    },
+    {
+      "naam": "Daan V.",
+      "locatie": "Zaandam",
+      "beoordeling": 5,
+      "pakket": "Pakket A",
+      "tekst": "Geweldige rijschool. Ik had last van rijangst maar dat is compleet verdwenen dankzij de rustige aanpak. In 15 lessen klaar, meteen geslaagd. De beste investering die ik heb gedaan!"
+    },
+    {
+      "naam": "Amira K.",
+      "locatie": "Almere",
+      "beoordeling": 5,
+      "pakket": "Pakket B",
+      "tekst": "Fatima is echt een topinstructeur. Ze weet precies waar je op moet letten voor het CBR-examen. Ik voelde me super goed voorbereid. Eerste keer geslaagd! De prijs is ook heel eerlijk."
+    },
+    {
+      "naam": "Thomas B.",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Pakket C",
+      "tekst": "Ik heb ADHD en was bang dat dat een probleem zou zijn, maar Youssef paste zijn stijl perfect aan mij aan. Korte instructies, veel herhaling. Uiteindelijk geslaagd na 32 lessen. Super blij!"
+    },
+    {
+      "naam": "Nour H.",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Start Snel",
+      "tekst": "Had al rijervaring uit het buitenland en wilde snel mijn Nederlandse rijbewijs. De proefles was gelijk duidelijk en eerlijk over wat ik nodig had. Na 12 lessen geslaagd. Top service!"
+    },
+    {
+      "naam": "Kevin J.",
+      "locatie": "Zaandam",
+      "beoordeling": 5,
+      "pakket": "Pakket B",
+      "tekst": "Flexibele lestijden zijn echt een must als je fulltime werkt. Kon 's avonds en in het weekend terecht. Instructeur altijd op tijd, professioneel en motiverend. Geslaagd in één keer!"
+    }
+  ],
   "werkwijze": [
     {
       "nummer": "01",
