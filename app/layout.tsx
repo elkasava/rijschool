@@ -23,7 +23,7 @@ const jsonLd = [
     name: siteName,
     url: siteUrl,
     telephone: "+31640695738",
-    email: "rij2gorijschool@gmail.com",
+    email: "info@rij2go.nl",
     description,
     address: {
       "@type": "PostalAddress",
