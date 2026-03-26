@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { m, useReducedMotion } from "framer-motion";
+import { scaleTap } from "@/lib/motion-presets";
 import {
   Accordion,
   AccordionContent,
@@ -14,6 +16,7 @@ import { registerGsap, gsap } from "@/lib/gsap";
 const faqs = content.faq;
 
 export default function FAQ() {
+  const prefersReduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const accordionRef = useRef<HTMLDivElement>(null);
@@ -156,14 +159,17 @@ export default function FAQ() {
               <p className="text-slate-800 font-semibold text-sm">Nog een vraag?</p>
               <p className="text-slate-400 text-xs">We reageren binnen een uur via WhatsApp</p>
             </div>
-            <a
+            <m.a
               href={`https://wa.me/${content.algemeen.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+              whileHover={prefersReduced ? undefined : scaleTap.whileHover}
+              whileTap={prefersReduced ? undefined : scaleTap.whileTap}
+              transition={scaleTap.transition}
+              className="ml-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block"
             >
               App ons
-            </a>
+            </m.a>
           </div>
         </div>
       </div>

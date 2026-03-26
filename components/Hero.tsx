@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { m } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
+import { scaleTap } from "@/lib/motion-presets";
 import { ArrowRight, Star, CheckCircle2, TrendingUp, Users, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import content from "@/data/content.json";
@@ -118,6 +119,8 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  const prefersReduced = useReducedMotion();
+
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -220,22 +223,34 @@ export default function Hero() {
               style={{ opacity: 0 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button
-                size="xl"
-                onClick={() => scrollTo("#contact")}
-                className="bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/25 hover:shadow-brand-400/40 transition-all duration-300 group"
+              <m.div
+                whileHover={prefersReduced ? undefined : scaleTap.whileHover}
+                whileTap={prefersReduced ? undefined : scaleTap.whileTap}
+                transition={scaleTap.transition}
               >
-                Proefles Aanvragen
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="xl"
-                variant="outline"
-                onClick={() => scrollTo("#pakketten")}
-                className="border-slate-600 text-slate-300 hover:text-white hover:bg-white/10 hover:border-slate-500"
+                <Button
+                  size="xl"
+                  onClick={() => scrollTo("#contact")}
+                  className="bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/25 hover:shadow-brand-400/40 transition-all duration-300 group"
+                >
+                  Proefles Aanvragen
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </m.div>
+              <m.div
+                whileHover={prefersReduced ? undefined : scaleTap.whileHover}
+                whileTap={prefersReduced ? undefined : scaleTap.whileTap}
+                transition={scaleTap.transition}
               >
-                Bekijk Pakketten
-              </Button>
+                <Button
+                  size="xl"
+                  variant="outline"
+                  onClick={() => scrollTo("#pakketten")}
+                  className="border-slate-600 text-slate-300 hover:text-white hover:bg-white/10 hover:border-slate-500"
+                >
+                  Bekijk Pakketten
+                </Button>
+              </m.div>
             </div>
           </div>
 

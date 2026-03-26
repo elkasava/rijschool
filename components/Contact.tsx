@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { m, AnimatePresence, useAnimate, useReducedMotion } from "framer-motion";
+import { scaleTap, successPop } from "@/lib/motion-presets";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -67,6 +69,9 @@ export default function Contact() {
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [interesse, setInteresse] = useState("Proefles");
+
+  const prefersReduced = useReducedMotion();
+  const [formScope, animateShake] = useAnimate();
 
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -201,7 +206,12 @@ export default function Contact() {
     setTouched(allTouched);
     const validationErrors = validateForm(form);
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
+    if (Object.keys(validationErrors).length > 0) {
+      if (!prefersReduced && formScope.current) {
+        animateShake(formScope.current, { x: [0, -8, 8, -5, 5, 0] }, { duration: 0.35 });
+      }
+      return;
+    }
 
     setStatus("sending");
 
@@ -230,12 +240,24 @@ export default function Contact() {
     setStatus("sent");
   };
 
-  const fieldError = (name: keyof FormFields) =>
-    touched[name] && errors[name] ? (
-      <p id={`${name}-error`} role="alert" className="text-rose-500 text-xs mt-1">
-        {errors[name]}
-      </p>
-    ) : null;
+  const fieldError = (name: keyof FormFields) => (
+    <AnimatePresence>
+      {touched[name] && errors[name] && (
+        <m.p
+          key={name}
+          id={`${name}-error`}
+          role="alert"
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.18 }}
+          className="text-rose-500 text-xs mt-1"
+        >
+          {errors[name]}
+        </m.p>
+      )}
+    </AnimatePresence>
+  );
 
   return (
     <section ref={sectionRef} id="contact" className="py-20 lg:py-28 bg-white">
@@ -328,8 +350,15 @@ export default function Contact() {
             ref={formRef}
             style={{ opacity: 0 }}
           >
+            <AnimatePresence mode="wait" initial={false}>
             {status === "sent" ? (
-              <div className="flex flex-col items-center justify-center text-center h-full min-h-[400px] bg-emerald-50 rounded-3xl border border-emerald-100 p-10">
+              <m.div
+                key="success"
+                variants={successPop}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-center justify-center text-center h-full min-h-[400px] bg-emerald-50 rounded-3xl border border-emerald-100 p-10"
+              >
                 <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle2 className="w-8 h-8 text-emerald-600" aria-hidden="true" />
                 </div>
@@ -340,11 +369,14 @@ export default function Contact() {
                   Bedankt voor je aanvraag, {form.naam}! We nemen zo snel
                   mogelijk contact met je op, uiterlijk binnen 24 uur.
                 </p>
-              </div>
+              </m.div>
             ) : (
-              <form
+              <m.form
+                key="form"
+                ref={formScope}
                 onSubmit={handleSubmit}
                 noValidate
+                initial={false}
                 aria-label="Contactformulier – stuur een aanvraag"
                 className="bg-slate-50 rounded-3xl p-8 lg:p-10 border border-slate-100"
               >
@@ -504,25 +536,32 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={status === "sending"}
-                  aria-label="Verstuur aanvraag via WhatsApp"
-                  className="w-full mt-6 bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/20 gap-2"
+                <m.div
+                  className="mt-6"
+                  whileHover={prefersReduced || status === "sending" ? undefined : scaleTap.whileHover}
+                  whileTap={prefersReduced || status === "sending" ? undefined : scaleTap.whileTap}
+                  transition={scaleTap.transition}
                 >
-                  {status === "sending" ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                      Versturen…
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" aria-hidden="true" />
-                      Verstuur Aanvraag
-                    </>
-                  )}
-                </Button>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={status === "sending"}
+                    aria-label="Verstuur aanvraag via WhatsApp"
+                    className="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/20 gap-2"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                        Versturen…
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" aria-hidden="true" />
+                        Verstuur Aanvraag
+                      </>
+                    )}
+                  </Button>
+                </m.div>
 
                 <p className="text-slate-400 text-xs text-center mt-3">
                   We reageren altijd binnen 24 uur. Liever direct contact?{" "}
@@ -535,8 +574,9 @@ export default function Contact() {
                   </a>
                   .
                 </p>
-              </form>
+              </m.form>
             )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

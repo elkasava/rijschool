@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { m, useReducedMotion } from "framer-motion";
 import { Check, Sparkles, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { track } from "@vercel/analytics";
 import contentData from "@/data/content.json";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
+import { cardLift, scaleTap } from "@/lib/motion-presets";
 
 interface Pakket {
   name: string;
@@ -201,6 +203,8 @@ export default function Pakketten() {
     return () => ctx.revert();
   }, []);
 
+  const prefersReduced = useReducedMotion();
+
   const slide = (dir: "prev" | "next") => {
     const el = scrollRef.current;
     if (!el) return;
@@ -283,10 +287,10 @@ export default function Pakketten() {
                     </div>
                   )}
 
-                  <div
+                  <m.div
+                    whileHover={prefersReduced ? undefined : cardLift.whileHover}
+                    transition={cardLift.transition}
                     className={`relative flex flex-col w-full rounded-2xl border overflow-hidden
-                      transition-transform duration-300 hover:-translate-y-1
-                      [perspective:800px] hover:[transform-style:preserve-3d]
                       ${
                         isStartSnel
                           ? "border-slate-700 shadow-xl shadow-slate-900/20"
@@ -414,22 +418,28 @@ export default function Pakketten() {
 
                     {/* CTA */}
                     <div className="px-6 pb-6 bg-white">
-                      <Button
-                        className={`w-full font-semibold text-sm ${
-                          isStartSnel
-                            ? "bg-pink-500 hover:bg-pink-400 text-white shadow-lg shadow-pink-500/25 border-0"
-                            : pakket.highlight
-                            ? "bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/25"
-                            : "border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-brand-300 hover:text-brand-700"
-                        }`}
-                        variant={isStartSnel || pakket.highlight ? "default" : "outline"}
-                        size="lg"
-                        onClick={() => scrollToContact(pakket.name)}
+                      <m.div
+                        whileHover={prefersReduced ? undefined : scaleTap.whileHover}
+                        whileTap={prefersReduced ? undefined : scaleTap.whileTap}
+                        transition={scaleTap.transition}
                       >
-                        {pakket.cta}
-                      </Button>
+                        <Button
+                          className={`w-full font-semibold text-sm ${
+                            isStartSnel
+                              ? "bg-pink-500 hover:bg-pink-400 text-white shadow-lg shadow-pink-500/25 border-0"
+                              : pakket.highlight
+                              ? "bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/25"
+                              : "border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-brand-300 hover:text-brand-700"
+                          }`}
+                          variant={isStartSnel || pakket.highlight ? "default" : "outline"}
+                          size="lg"
+                          onClick={() => scrollToContact(pakket.name)}
+                        >
+                          {pakket.cta}
+                        </Button>
+                      </m.div>
                     </div>
-                  </div>
+                  </m.div>
                 </div>
               );
             })}
