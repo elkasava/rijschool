@@ -13,7 +13,7 @@
     "stats": [
       { "value": "96%", "label": "Slagingspercentage" },
       { "value": "10+", "label": "Jaar ervaring" },
-      { "value": "2.000+", "label": "Tevreden leerlingen" }
+      { "value": "200+", "label": "Tevreden leerlingen" }
     ],
     "subtext": "Bij Rij2Go leer je rijden op jouw tempo. Persoonlijke aandacht, moderne lesauto's en flexibele lestijden die passen bij jouw schema. Actief in Amsterdam, Zaandam én Almere.",
     "checkmarks": ["Persoonlijke begeleiding", "Handgeschakeld & Automaat", "Flexibele planning"],
@@ -268,7 +268,7 @@
       "locatie": "Amsterdam",
       "beoordeling": 5,
       "pakket": "Pakket B",
-      "tekst": "Na twee mislukte pogingen bij een andere rijschool probeerde ik Rij2Go. Wat een verschil! Jerry legde alles rustig uit en had veel geduld. Na 20 lessen ben ik in één keer geslaagd. Absoluut aanraden!"
+      "tekst": "Na twee mislukte pogingen bij een andere rijschool probeerde ik Rij2Go. Wat een verschil! De instructeur legde alles rustig uit en had veel geduld. Na 20 lessen ben ik in één keer geslaagd. Absoluut aanraden!"
     },
     {
       "naam": "Lizzy",
@@ -289,7 +289,7 @@
       "locatie": "Amsterdam",
       "beoordeling": 5,
       "pakket": "Pakket C",
-      "tekst": "Ik heb ADHD en was bang dat dat een probleem zou zijn, maar Jerry paste zijn stijl perfect aan mij aan. Korte instructies, veel herhaling. Uiteindelijk geslaagd na 32 lessen. Super blij!"
+      "tekst": "Ik heb ADHD en was bang dat dat een probleem zou zijn, maar de instructeur paste zijn stijl perfect aan mij aan. Korte instructies, veel herhaling. Uiteindelijk geslaagd na 32 lessen. Super blij!"
     },
     {
       "naam": "Rajob Pashul",
