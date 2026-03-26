@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# env files
+.env
+.env.local
+.env*.local
+
+# large media files
+public/hero-video.mp4
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*

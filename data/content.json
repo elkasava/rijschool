@@ -1,0 +1,295 @@
+{
+  "algemeen": {
+    "schoolNaam": "Rijschool Rij2Go",
+    "telefoon": "06-4069 5738",
+    "telefoonLink": "+31640695738",
+    "email": "rij2gorijschool@gmail.com",
+    "whatsapp": "31640695738",
+    "werkgebied": "Amsterdam, Zaandam & Almere",
+    "openingstijden": "Ma–Za: 08:00 – 20:00"
+  },
+  "hero": {
+    "beoordeling": "9.2 / 10",
+    "stats": [
+      { "value": "96%", "label": "Slagingspercentage" },
+      { "value": "10+", "label": "Jaar ervaring" },
+      { "value": "2.000+", "label": "Tevreden leerlingen" }
+    ],
+    "subtext": "Bij Rij2Go leer je rijden op jouw tempo. Persoonlijke aandacht, moderne lesauto's en flexibele lestijden die passen bij jouw schema. Actief in Amsterdam, Zaandam én Almere.",
+    "checkmarks": ["Proefles beschikbaar", "Handgeschakeld & Automaat", "Flexibele planning"],
+    "autoMerk": "Moderne Lesauto",
+    "autoType": "Automaat & Handgeschakeld",
+    "autoFeatures": ["Airco", "Dual control", "Veilig & comfortabel", "Nieuwste technologie"]
+  },
+  "pakketten": [
+    {
+      "name": "Start Snel",
+      "tag": "Snelle kiezer",
+      "price": "€ 529",
+      "priceOld": "€ 650",
+      "priceNote": "excl. CBR examen",
+      "lessen": "10 rijlessen",
+      "duration": "rijbewijs B",
+      "korting": "Gratis proefles + geen inschrijfkosten",
+      "description": "Direct van start. Met gratis proefles en geen inschrijfkosten meteen achter het stuur.",
+      "features": [
+        "10 rijbewijs B rijlessen",
+        "Theorie ondersteuning",
+        "Digitale rijlesmap",
+        "Gratis proefles (t.w.v. €49,95)",
+        "Geen inschrijfkosten (t.w.v. €29,95)"
+      ],
+      "highlight": false,
+      "accent": "pink",
+      "cta": "Inschrijven"
+    },
+    {
+      "name": "Pakket A",
+      "tag": "",
+      "price": "€ 1.385",
+      "priceNote": "incl. CBR examen",
+      "lessen": "15 rijlessen",
+      "duration": "à 60 minuten",
+      "korting": "€15 pakketkorting",
+      "description": "Ideaal als je al wat rijervaring hebt of snel de basis wilt leren.",
+      "features": [
+        "15 praktijklessen (60 min)",
+        "CBR-praktijkexamen inbegrepen",
+        "Handgeschakeld of Automaat",
+        "Examenvoorbereiding",
+        "CBR-examenaanvraag"
+      ],
+      "highlight": false,
+      "cta": "Kies Pakket A"
+    },
+    {
+      "name": "Pakket B",
+      "tag": "Meest gekozen",
+      "price": "€ 2.035",
+      "priceNote": "incl. CBR examen",
+      "lessen": "25 rijlessen",
+      "duration": "à 60 minuten",
+      "korting": "€65 pakketkorting",
+      "description": "Het perfecte pakket voor de meeste leerlingen. Inclusief CBR-examen.",
+      "features": [
+        "25 praktijklessen (60 min)",
+        "CBR-praktijkexamen inbegrepen",
+        "Handgeschakeld of Automaat",
+        "Examenvoorbereiding",
+        "CBR-examenaanvraag"
+      ],
+      "highlight": true,
+      "cta": "Kies Pakket B"
+    },
+    {
+      "name": "Pakket C",
+      "tag": "",
+      "price": "€ 2.675",
+      "priceNote": "incl. CBR examen",
+      "lessen": "35 rijlessen",
+      "duration": "à 60 minuten",
+      "korting": "€125 pakketkorting",
+      "description": "Extra lessen, extra korting. Voor leerlingen die grondig willen oefenen.",
+      "features": [
+        "35 praktijklessen (60 min)",
+        "CBR-praktijkexamen inbegrepen",
+        "Handgeschakeld of Automaat",
+        "Intensieve examentraining",
+        "CBR-examenaanvraag"
+      ],
+      "highlight": false,
+      "cta": "Kies Pakket C"
+    },
+    {
+      "name": "Pakket D",
+      "tag": "",
+      "price": "€ 3.275",
+      "priceNote": "incl. CBR examen",
+      "lessen": "45 rijlessen",
+      "duration": "à 60 minuten",
+      "korting": "€225 pakketkorting",
+      "description": "Maximale begeleiding en de grootste korting. Haal je rijbewijs zeker.",
+      "features": [
+        "45 praktijklessen (60 min)",
+        "CBR-praktijkexamen inbegrepen",
+        "Handgeschakeld of Automaat",
+        "Intensieve examentraining",
+        "CBR-examenaanvraag",
+        "Prioriteit bij planning"
+      ],
+      "highlight": false,
+      "cta": "Kies Pakket D"
+    }
+  ],
+  "losseTarieven": [
+    { "label": "Proefles", "prijs": "€ 50" },
+    { "label": "Losse rijles (60 min)", "prijs": "€ 70" },
+    { "label": "Tussenevaluatie", "prijs": "€ 249" },
+    { "label": "Praktijkexamen", "prijs": "€ 349" },
+    { "label": "Herexamen", "prijs": "€ 349" },
+    { "label": "Angstrijexamen", "prijs": "€ 449" },
+    { "label": "Nader onderzoek", "prijs": "€ 425" }
+  ],
+  "faq": [
+    {
+      "vraag": "Wat zijn de kosten van één losse rijles?",
+      "antwoord": "Een losse rijles van 60 minuten kost €70. We adviseren echter om een pakket te kiezen, want hoe groter het pakket, hoe groter de korting — tot wel €225. Vraag eerst een proefles aan (€50) — dan kunnen we je het beste pakket adviseren."
+    },
+    {
+      "vraag": "In welke gebieden geven jullie rijlessen?",
+      "antwoord": "We geven rijlessen in Amsterdam, Zaandam en Almere. We halen je op aan een afgesproken locatie: thuis, op je werk of bij de bushalte. Twijfel je of we in jouw buurt rijden? Neem even contact op via WhatsApp!"
+    },
+    {
+      "vraag": "Hoe lang duurt het gemiddeld om te slagen voor mijn rijexamen?",
+      "antwoord": "Dat verschilt per persoon. Gemiddeld halen onze leerlingen hun rijbewijs na 20 tot 30 rijlessen. Sommige leerlingen zijn klaar na 15 lessen, anderen hebben er 40 nodig. We bepalen samen tijdens de proefles wat realistisch is voor jou en stellen een eerlijk plan op."
+    },
+    {
+      "vraag": "Kan ik ook les nemen in een automaat?",
+      "antwoord": "Ja, zeker! We bieden lessen aan in zowel een handgeschakelde auto als een automaat. Houd er rekening mee dat een automaat-rijbewijs je niet toestaat om handgeschakeld te rijden. We bespreken samen wat voor jou de beste keuze is."
+    },
+    {
+      "vraag": "Wat als ik zak voor mijn rijexamen?",
+      "antwoord": "Niet geslaagd? Geen paniek — dat overkomt de besten. We analyseren het feedbackrapport van het CBR samen en trainen gericht op de punten die beter kunnen. Een herexamen kost €349. Hoe groter je pakket, hoe beter voorbereid je bent — en hoe kleiner de kans op een herexamen."
+    },
+    {
+      "vraag": "Kan ik lessen annuleren of verzetten?",
+      "antwoord": "Ja, je kunt lessen kosteloos annuleren of verzetten tot 48 uur van tevoren. Bij annulering binnen 48 uur brengen we een vergoeding van €29 in rekening. We begrijpen dat het leven soms anders loopt — communiceer het gewoon tijdig met ons."
+    },
+    {
+      "vraag": "Wanneer moet ik het theorie-examen doen?",
+      "antwoord": "Het CBR vereist dat je je theorie-examen haalt vóórdat je je praktijkexamen kunt afleggen. We adviseren om zo vroeg mogelijk te beginnen met theorie leren — idealiter gelijktijdig met je eerste praktijklessen. Zo lig je niet achter wanneer je klaar bent voor het rijexamen."
+    },
+    {
+      "vraag": "Vanaf welke leeftijd kan ik rijlessen nemen?",
+      "antwoord": "Je kunt je theorie-examen doen vanaf 16 jaar. Rijlessen starten vanaf 16,5 jaar en je mag je praktijkexamen afleggen vanaf 17 jaar. Wil je zo vroeg mogelijk beginnen? Neem contact op — dan plannen we alles zo efficiënt mogelijk voor je in."
+    },
+    {
+      "vraag": "Bieden jullie ook begeleiding voor leerlingen met rijangst of ADHD?",
+      "antwoord": "Absoluut. Onze instructeurs hebben ervaring met leerlingen die last hebben van rijangst, examenangst, ADHD of autisme. We passen het lestempo, de communicatiestijl en de aanpak volledig aan op jouw situatie. Rustig opbouwen, stap voor stap — zodat jij met vertrouwen het examen in gaat."
+    },
+    {
+      "vraag": "Zijn er ook lessen in het Engels beschikbaar?",
+      "antwoord": "Ja! Woon je in Amsterdam, Zaandam of Almere maar spreek je liever Engels? Geen probleem. We geven ook lessen in het Engels. Neem contact met ons op via WhatsApp of mail — we zoeken samen de best passende instructeur voor jou."
+    },
+    {
+      "vraag": "Hoe lang duurt een rijles en kan ik ook langere lessen nemen?",
+      "antwoord": "Een standaard rijles bij Rij2Go duurt 60 minuten. In overleg is het ook mogelijk om langere lessen te plannen van 90 of 120 minuten — ideaal als je snel wilt vorderen of een intensieve voorbereiding op je examen wilt. Bespreek dit gewoon met je instructeur."
+    }
+  ],
+  "voordelen": [
+    {
+      "icon": "Heart",
+      "title": "Persoonlijke Aandacht",
+      "description": "Bij Rij2Go staat jij centraal. Onze ervaren instructeurs passen zich aan jouw tempo en leerstijl aan. Of je nu een beginner bent of al wat ervaring hebt, je voelt je altijd op je gemak.",
+      "color": "text-rose-400",
+      "bg": "bg-rose-400/10"
+    },
+    {
+      "icon": "Trophy",
+      "title": "Hoog Slagingspercentage",
+      "description": "Met een slagingspercentage van 96% behoren we tot de beste rijscholen van Nederland. Onze doordachte lesopbouw en examentraining zorgen dat jij goed voorbereid aan je examen begint.",
+      "color": "text-amber-400",
+      "bg": "bg-amber-400/10"
+    },
+    {
+      "icon": "Zap",
+      "title": "Moderne Lesauto's",
+      "description": "We rijden uitsluitend in moderne, veilige voertuigen die volledig zijn uitgerust met de nieuwste technologie. Comfortabel, betrouwbaar en met dual controls voor extra veiligheid.",
+      "color": "text-brand-400",
+      "bg": "bg-brand-400/10"
+    },
+    {
+      "icon": "Shield",
+      "title": "Erkend & Gecertificeerd",
+      "description": "Rijschool Rij2Go is officieel erkend door het CBR en voldoet aan alle kwaliteitseisen. Jij kunt erop vertrouwen dat je bij ons in goede handen bent.",
+      "color": "text-emerald-400",
+      "bg": "bg-emerald-400/10"
+    },
+    {
+      "icon": "Clock",
+      "title": "Flexibele Lestijden",
+      "description": "Plan je lessen wanneer het jou uitkomt. Avond-, weekend- en ochtendlessen zijn allemaal mogelijk in Amsterdam, Zaandam en Almere. Wij passen ons aan jouw agenda aan.",
+      "color": "text-sky-400",
+      "bg": "bg-sky-400/10"
+    },
+    {
+      "icon": "ThumbsUp",
+      "title": "Snelle Lespakketten",
+      "description": "Wil je zo snel mogelijk je rijbewijs halen? Onze intensieve pakketten zijn speciaal ontworpen voor leerlingen die doelgericht en efficiënt willen rijden naar hun rijbewijs.",
+      "color": "text-violet-400",
+      "bg": "bg-violet-400/10"
+    }
+  ],
+  "specialeBegeleiding": [
+    {
+      "icon": "Brain",
+      "title": "ADHD & Autisme",
+      "description": "Onze instructeurs zijn getraind in het begeleiden van leerlingen met ADHD of autisme. We passen het lestempo, de instructiestijl en de structuur volledig aan op jouw behoeften. Jij rijdt op jouw manier — wij zorgen voor de juiste aanpak.",
+      "tag": "Gespecialiseerde begeleiding",
+      "color": "text-violet-500",
+      "bg": "bg-violet-50",
+      "border": "border-violet-100"
+    },
+    {
+      "icon": "HeartHandshake",
+      "title": "Rijangst & Examenangst",
+      "description": "Last van rijangst of zenuwen voor het examen? We beginnen rustig, bouwen stap voor stap vertrouwen op en oefenen in een veilige omgeving. Veel van onze leerlingen die eerder gefaald hadden, haalden bij ons wél hun rijbewijs.",
+      "tag": "Rustige & veilige aanpak",
+      "color": "text-rose-500",
+      "bg": "bg-rose-50",
+      "border": "border-rose-100"
+    },
+    {
+      "icon": "Settings2",
+      "title": "Automaat Rijbewijs",
+      "description": "Liever een automaat? Dat begrijpen we. Rijlessen op een automatische transmissie zijn bij ons mogelijk in alle pakketten — voor hetzelfde tarief. Wij helpen je kiezen: automaat of handgeschakeld, wat past het beste bij jou?",
+      "tag": "Alle pakketten beschikbaar",
+      "color": "text-brand-600",
+      "bg": "bg-brand-50",
+      "border": "border-brand-100"
+    },
+    {
+      "icon": "Globe",
+      "title": "Lessen in het Engels",
+      "description": "Woon je in Amsterdam, Zaandam of Almere maar spreek je liever Engels? Geen probleem. We bieden rijlessen aan in het Engels, zodat de taalbarrière geen obstakel is op weg naar jouw rijbewijs.",
+      "tag": "English lessons available",
+      "color": "text-emerald-600",
+      "bg": "bg-emerald-50",
+      "border": "border-emerald-100"
+    }
+  ],
+  "werkwijze": [
+    {
+      "nummer": "01",
+      "icon": "Car",
+      "title": "Proefles",
+      "description": "We beginnen altijd met een proefles van 45 minuten. Zo leer je onze instructeur kennen, rijden we samen een stuk en stellen we een persoonlijk leerplan op. Geheel vrijblijvend.",
+      "details": ["45 minuten", "Vrijblijvend", "Persoonlijk leerplan"],
+      "color": "indigo"
+    },
+    {
+      "nummer": "02",
+      "icon": "BookOpen",
+      "title": "Theorie Leren",
+      "description": "Terwijl je praktijklessen volgt, bereid je je ook voor op het theorie-examen. We bieden online theorie-ondersteuning, oefenexamens en tips om snel te slagen.",
+      "details": ["Online oefenexamens", "Digitaal lesmateriaal", "Op je eigen tempo"],
+      "color": "violet"
+    },
+    {
+      "nummer": "03",
+      "icon": "GraduationCap",
+      "title": "Praktijklessen",
+      "description": "Je volgt rijlessen op maat — van basisvaardigheden tot complexe verkeerssituaties. We trainen je specifiek voor de eisen van het CBR-examen in Amsterdam, Zaandam of Almere.",
+      "details": ["Lessen op maat", "Examenroutes", "Regelmatige feedback"],
+      "color": "sky"
+    },
+    {
+      "nummer": "04",
+      "icon": "Award",
+      "title": "Slagen voor je Examen!",
+      "description": "Wanneer je er klaar voor bent, begeleiden we je CBR-examenaanvraag en rijden we samen de examenroute. Na het behalen van je rijbewijs ben je echt klaar voor de weg.",
+      "details": ["CBR-begeleiding", "Examentraining", "Rijbewijs op zak!"],
+      "color": "emerald"
+    }
+  ]
+}
