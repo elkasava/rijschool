@@ -185,25 +185,11 @@
       "bg": "bg-rose-400/10"
     },
     {
-      "icon": "Trophy",
-      "title": "Hoog Slagingspercentage",
-      "description": "Met een slagingspercentage van 96% behoren we tot de beste rijscholen van Nederland. Onze doordachte lesopbouw en examentraining zorgen dat jij goed voorbereid aan je examen begint.",
-      "color": "text-amber-400",
-      "bg": "bg-amber-400/10"
-    },
-    {
       "icon": "Zap",
       "title": "Moderne Lesauto's",
       "description": "We rijden uitsluitend in moderne, veilige voertuigen die volledig zijn uitgerust met de nieuwste technologie. Comfortabel, betrouwbaar en met dual controls voor extra veiligheid.",
       "color": "text-brand-400",
       "bg": "bg-brand-400/10"
-    },
-    {
-      "icon": "Shield",
-      "title": "Erkend & Gecertificeerd",
-      "description": "Rijschool Rij2Go is officieel erkend door het CBR en voldoet aan alle kwaliteitseisen. Jij kunt erop vertrouwen dat je bij ons in goede handen bent.",
-      "color": "text-emerald-400",
-      "bg": "bg-emerald-400/10"
     },
     {
       "icon": "Clock",
