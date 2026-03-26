@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Loader2,
 } from "lucide-react";
+import { track } from "@vercel/analytics";
 import siteContent from "@/data/content.json";
 import { registerGsap, gsap } from "@/lib/gsap";
 
@@ -32,8 +33,38 @@ const contactInfo = [
   { icon: Clock, label: "Openingstijden", value: openingstijden, href: null as string | null },
 ];
 
+type FormFields = { naam: string; email: string; telefoon: string; bericht: string; datum: string; tijd: string };
+type FormErrors = Partial<Record<keyof FormFields, string>>;
+
+function sanitize(value: string): string {
+  return value.replace(/[<>"'`]/g, "").trim();
+}
+
+function validateEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function validateForm(form: FormFields): FormErrors {
+  const errors: FormErrors = {};
+  if (!form.naam.trim()) errors.naam = "Vul je naam in.";
+  else if (form.naam.trim().length < 2) errors.naam = "Naam moet minimaal 2 tekens zijn.";
+
+  if (!form.email.trim()) errors.email = "Vul je e-mailadres in.";
+  else if (!validateEmail(form.email)) errors.email = "Voer een geldig e-mailadres in.";
+
+  if (form.telefoon && !/^[0-9()+\-\s]{6,20}$/.test(form.telefoon))
+    errors.telefoon = "Voer een geldig telefoonnummer in.";
+
+  if (!form.bericht.trim()) errors.bericht = "Schrijf een kort bericht.";
+  else if (form.bericht.trim().length < 10) errors.bericht = "Bericht moet minimaal 10 tekens zijn.";
+
+  return errors;
+}
+
 export default function Contact() {
-  const [form, setForm] = useState({ naam: "", email: "", telefoon: "", bericht: "", datum: "", tijd: "" });
+  const [form, setForm] = useState<FormFields>({ naam: "", email: "", telefoon: "", bericht: "", datum: "", tijd: "" });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [interesse, setInteresse] = useState("Proefles");
 
@@ -47,7 +78,6 @@ export default function Contact() {
     registerGsap();
 
     const ctx = gsap.context(() => {
-      // Section header
       gsap.fromTo(
         headerRef.current,
         { y: 30, opacity: 0 },
@@ -64,7 +94,6 @@ export default function Contact() {
         }
       );
 
-      // Contact info panel from left
       gsap.fromTo(
         infoRef.current,
         { x: -40, opacity: 0 },
@@ -82,7 +111,6 @@ export default function Contact() {
         }
       );
 
-      // Contact info items stagger from left
       const infoItems = infoRef.current?.querySelectorAll("[data-info-item]");
       if (infoItems && infoItems.length > 0) {
         gsap.fromTo(
@@ -104,7 +132,6 @@ export default function Contact() {
         );
       }
 
-      // Form panel from right
       gsap.fromTo(
         formRef.current,
         { x: 40, opacity: 0 },
@@ -122,7 +149,6 @@ export default function Contact() {
         }
       );
 
-      // Form fields stagger in from left
       const formFields = formRef.current?.querySelectorAll("[data-field]");
       if (formFields && formFields.length > 0) {
         gsap.fromTo(
@@ -149,24 +175,67 @@ export default function Contact() {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    // Re-validate field on change if already touched
+    if (touched[name as keyof FormFields]) {
+      const newErrors = validateForm({ ...form, [name]: value });
+      setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormFields] }));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const newErrors = validateForm(form);
+    setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormFields] }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Validate all fields
+    const allTouched = Object.keys(form).reduce(
+      (acc, k) => ({ ...acc, [k]: true }),
+      {} as Record<keyof FormFields, boolean>
+    );
+    setTouched(allTouched);
+    const validationErrors = validateForm(form);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+
     setStatus("sending");
+
+    // Sanitize before sending
+    const safe = {
+      naam: sanitize(form.naam),
+      email: sanitize(form.email),
+      telefoon: sanitize(form.telefoon),
+      bericht: sanitize(form.bericht),
+      datum: sanitize(form.datum),
+      tijd: sanitize(form.tijd),
+    };
+
     const msg =
       `Hallo Rij2Go! 👋\n\n` +
-      `Naam: ${form.naam}\n` +
-      `E-mail: ${form.email}\n` +
-      `Telefoon: ${form.telefoon || "niet opgegeven"}\n` +
+      `Naam: ${safe.naam}\n` +
+      `E-mail: ${safe.email}\n` +
+      `Telefoon: ${safe.telefoon || "niet opgegeven"}\n` +
       `Interesse: ${interesse}\n` +
-      (form.datum ? `Gewenste datum: ${form.datum}${form.tijd ? ` om ${form.tijd}` : ""}\n` : "") +
-      `\nBericht:\n${form.bericht}`;
-    const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/${whatsapp}?text=${encoded}`, "_blank");
+      (safe.datum ? `Gewenste datum: ${safe.datum}${safe.tijd ? ` om ${safe.tijd}` : ""}\n` : "") +
+      `\nBericht:\n${safe.bericht}`;
+
+    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+
+    track("contact_form_submit", { interesse });
     setStatus("sent");
   };
+
+  const fieldError = (name: keyof FormFields) =>
+    touched[name] && errors[name] ? (
+      <p id={`${name}-error`} role="alert" className="text-rose-500 text-xs mt-1">
+        {errors[name]}
+      </p>
+    ) : null;
 
   return (
     <section ref={sectionRef} id="contact" className="py-20 lg:py-28 bg-white">
@@ -215,7 +284,7 @@ export default function Contact() {
                       className="flex items-start gap-4"
                     >
                       <div className="w-10 h-10 bg-brand-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-5 h-5 text-brand-400" />
+                        <Icon className="w-5 h-5 text-brand-400" aria-hidden="true" />
                       </div>
                       <div>
                         <p className="text-slate-500 text-xs mb-0.5">{item.label}</p>
@@ -223,6 +292,9 @@ export default function Contact() {
                           <a
                             href={item.href}
                             className="text-white font-medium text-sm hover:text-brand-400 transition-colors"
+                            onClick={() =>
+                              track("contact_info_click", { type: item.label.toLowerCase() })
+                            }
                           >
                             {item.value}
                           </a>
@@ -246,7 +318,7 @@ export default function Contact() {
                   { label: "Snel reageren", sub: "Binnen 24 uur contact" },
                 ].map((badge) => (
                   <div key={badge.label} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-white text-xs font-semibold">{badge.label}</p>
                       <p className="text-slate-500 text-xs">{badge.sub}</p>
@@ -265,7 +337,7 @@ export default function Contact() {
             {status === "sent" ? (
               <div className="flex flex-col items-center justify-center text-center h-full min-h-[400px] bg-emerald-50 rounded-3xl border border-emerald-100 p-10">
                 <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+                  <CheckCircle2 className="w-8 h-8 text-emerald-600" aria-hidden="true" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">
                   Bericht verstuurd!
@@ -278,6 +350,8 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
+                noValidate
+                aria-label="Contactformulier – stuur een aanvraag"
                 className="bg-slate-50 rounded-3xl p-8 lg:p-10 border border-slate-100"
               >
                 <h3 className="text-xl font-bold text-slate-900 mb-6">
@@ -288,23 +362,28 @@ export default function Contact() {
                   {/* Name */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="naam" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Naam <span className="text-rose-500">*</span>
+                      Naam <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <Input
                       id="naam"
                       name="naam"
                       value={form.naam}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Jan de Vries"
                       required
-                      className="bg-white border-slate-200 focus-visible:ring-brand-500"
+                      aria-required="true"
+                      aria-invalid={touched.naam && !!errors.naam}
+                      aria-describedby={errors.naam ? "naam-error" : undefined}
+                      className={`bg-white border-slate-200 focus-visible:ring-brand-500 ${touched.naam && errors.naam ? "border-rose-400 focus-visible:ring-rose-400" : ""}`}
                     />
+                    {fieldError("naam")}
                   </div>
 
                   {/* Email */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      E-mailadres <span className="text-rose-500">*</span>
+                      E-mailadres <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <Input
                       id="email"
@@ -312,10 +391,15 @@ export default function Contact() {
                       type="email"
                       value={form.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="jan@voorbeeld.nl"
                       required
-                      className="bg-white border-slate-200 focus-visible:ring-brand-500"
+                      aria-required="true"
+                      aria-invalid={touched.email && !!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      className={`bg-white border-slate-200 focus-visible:ring-brand-500 ${touched.email && errors.email ? "border-rose-400 focus-visible:ring-rose-400" : ""}`}
                     />
+                    {fieldError("email")}
                   </div>
 
                   {/* Phone */}
@@ -329,9 +413,13 @@ export default function Contact() {
                       type="tel"
                       value={form.telefoon}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="06-1234 5678"
-                      className="bg-white border-slate-200 focus-visible:ring-brand-500"
+                      aria-invalid={touched.telefoon && !!errors.telefoon}
+                      aria-describedby={errors.telefoon ? "telefoon-error" : undefined}
+                      className={`bg-white border-slate-200 focus-visible:ring-brand-500 ${touched.telefoon && errors.telefoon ? "border-rose-400 focus-visible:ring-rose-400" : ""}`}
                     />
+                    {fieldError("telefoon")}
                   </div>
 
                   {/* Date + Time */}
@@ -359,6 +447,7 @@ export default function Contact() {
                         name="tijd"
                         value={form.tijd}
                         onChange={(e) => setForm({ ...form, tijd: e.target.value })}
+                        aria-label="Gewenste lestijd"
                         className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                       >
                         <option value="">Kies tijd</option>
@@ -372,45 +461,52 @@ export default function Contact() {
                   {/* Message */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="bericht" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Bericht <span className="text-rose-500">*</span>
+                      Bericht <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <textarea
                       id="bericht"
                       name="bericht"
                       value={form.bericht}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Vertel ons meer over jezelf en je rijervaring..."
                       required
+                      aria-required="true"
+                      aria-invalid={touched.bericht && !!errors.bericht}
+                      aria-describedby={errors.bericht ? "bericht-error" : undefined}
                       rows={4}
-                      className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
+                      className={`flex w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none ${touched.bericht && errors.bericht ? "border-rose-400 focus-visible:ring-rose-400" : "border-slate-200"}`}
                     />
+                    {fieldError("bericht")}
                   </div>
 
                   {/* Interest */}
                   <div data-field style={{ opacity: 0 }}>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Ik ben geïnteresseerd in
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {interesseOpties.map((opt) => (
-                        <label
-                          key={opt}
-                          className="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 cursor-pointer hover:border-brand-300 transition-colors has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50"
-                        >
-                          <input
-                            type="radio"
-                            name="interesse"
-                            value={opt}
-                            checked={interesse === opt}
-                            onChange={() => setInteresse(opt)}
-                            className="accent-brand-600"
-                          />
-                          <span className="text-slate-700 text-xs font-medium">
-                            {opt}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
+                    <fieldset>
+                      <legend className="block text-sm font-medium text-slate-700 mb-2">
+                        Ik ben geïnteresseerd in
+                      </legend>
+                      <div className="flex flex-wrap gap-2">
+                        {interesseOpties.map((opt) => (
+                          <label
+                            key={opt}
+                            className="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 cursor-pointer hover:border-brand-300 transition-colors has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50"
+                          >
+                            <input
+                              type="radio"
+                              name="interesse"
+                              value={opt}
+                              checked={interesse === opt}
+                              onChange={() => setInteresse(opt)}
+                              className="accent-brand-600"
+                            />
+                            <span className="text-slate-700 text-xs font-medium">
+                              {opt}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
                   </div>
                 </div>
 
@@ -418,16 +514,17 @@ export default function Contact() {
                   type="submit"
                   size="lg"
                   disabled={status === "sending"}
+                  aria-label="Verstuur aanvraag via WhatsApp"
                   className="w-full mt-6 bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/20 gap-2"
                 >
                   {status === "sending" ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                       Versturen…
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
+                      <Send className="w-4 h-4" aria-hidden="true" />
                       Verstuur Aanvraag
                     </>
                   )}
@@ -438,6 +535,7 @@ export default function Contact() {
                   <a
                     href={`tel:${telefoonLink}`}
                     className="text-brand-600 hover:underline"
+                    onClick={() => track("contact_phone_click")}
                   >
                     Bel ons
                   </a>

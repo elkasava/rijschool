@@ -3,6 +3,7 @@
 import { m, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import { track } from "@vercel/analytics";
 import content from "@/data/content.json";
 
 // WhatsApp SVG icon
@@ -82,7 +83,11 @@ export default function WhatsAppButton() {
             href={`https://wa.me/${content.algemeen.whatsapp}?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20jullie%20rijlessen.`}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => setShowTooltip(false)}
+            aria-label="Chat met ons via WhatsApp"
+            onClick={() => {
+              setShowTooltip(false);
+              track("whatsapp_floating_click");
+            }}
             className="relative group"
           >
             {/* Pulse ring */}

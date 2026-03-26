@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Check, Sparkles, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { track } from "@vercel/analytics";
 import contentData from "@/data/content.json";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -208,7 +209,8 @@ export default function Pakketten() {
     el.scrollBy({ left: dir === "next" ? cardWidth : -cardWidth, behavior: "smooth" });
   };
 
-  const scrollToContact = () => {
+  const scrollToContact = (pakketName?: string) => {
+    if (pakketName) track("pakket_cta_click", { pakket: pakketName });
     const el = document.querySelector("#contact");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -422,7 +424,7 @@ export default function Pakketten() {
                         }`}
                         variant={isStartSnel || pakket.highlight ? "default" : "outline"}
                         size="lg"
-                        onClick={scrollToContact}
+                        onClick={() => scrollToContact(pakket.name)}
                       >
                         {pakket.cta}
                       </Button>

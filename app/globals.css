@@ -53,6 +53,38 @@
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* ── Skip-to-content link (screen readers + keyboard) ── */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: #1E6DB5;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ── Global focus-visible outline (keyboard nav) ── */
+*:focus-visible {
+  outline: 3px solid #1E6DB5;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Remove outline for mouse clicks (pointer devices) */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

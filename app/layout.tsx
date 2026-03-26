@@ -16,49 +16,100 @@ const siteName = "Rijschool Rij2Go";
 const description =
   "Rijschool Rij2Go biedt kwalitatieve rijlessen in Amsterdam, Zaandam en Almere. Persoonlijke aandacht, 96% slagingspercentage en moderne lesauto's. Boek nu je gratis proefles!";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "DrivingSchool",
-  name: siteName,
-  url: siteUrl,
-  telephone: "+31640695738",
-  email: "rij2gorijschool@gmail.com",
-  description,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Amsterdam",
-    addressRegion: "Noord-Holland",
-    addressCountry: "NL",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "DrivingSchool",
+    name: siteName,
+    url: siteUrl,
+    telephone: "+31640695738",
+    email: "rij2gorijschool@gmail.com",
+    description,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Amsterdam",
+      addressRegion: "Noord-Holland",
+      addressCountry: "NL",
+    },
+    areaServed: ["Amsterdam", "Zaandam", "Almere"],
+    openingHours: "Mo-Sa 08:00-20:00",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "9.2",
+      bestRating: "10",
+      worstRating: "1",
+      ratingCount: "200",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Rijpakketten",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Proefles",
+          price: "50",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: `${siteUrl}/#contact`,
+        },
+        {
+          "@type": "Offer",
+          name: "Pakket B – Meest gekozen",
+          price: "2035",
+          priceCurrency: "EUR",
+          description: "25 rijlessen inclusief CBR-praktijkexamen",
+          availability: "https://schema.org/InStock",
+          url: `${siteUrl}/#pakketten`,
+        },
+        {
+          "@type": "Offer",
+          name: "Start Snel",
+          price: "1499",
+          priceCurrency: "EUR",
+          description: "Intensief pakket, rijbewijs in korte tijd",
+          availability: "https://schema.org/InStock",
+          url: `${siteUrl}/#pakketten`,
+        },
+      ],
+    },
   },
-  areaServed: ["Amsterdam", "Zaandam", "Almere"],
-  openingHours: "Mo-Sa 08:00-20:00",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "9.2",
-    bestRating: "10",
-    worstRating: "1",
-    ratingCount: "200",
-  },
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Rijpakketten",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        name: "Proefles",
-        price: "50",
-        priceCurrency: "EUR",
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "Rijbewijs B halen – Rijschool Rij2Go",
+    description:
+      "Leer autorijden bij Rijschool Rij2Go. Persoonlijke begeleiding, modern lesvoertuig en 96% slagingspercentage. Beschikbaar in Amsterdam, Zaandam en Almere.",
+    provider: {
+      "@type": "DrivingSchool",
+      name: siteName,
+      url: siteUrl,
+    },
+    educationalLevel: "Beginner tot gevorderd",
+    teaches: "Rijvaardigheid categorie B (personenauto)",
+    courseMode: "onsite",
+    availableLanguage: ["nl", "ar", "fr"],
+    offers: {
+      "@type": "Offer",
+      price: "50",
+      priceCurrency: "EUR",
+      name: "Proefles – vrijblijvend kennismaken",
+      url: `${siteUrl}/#contact`,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "onsite",
+      location: {
+        "@type": "Place",
+        name: "Amsterdam / Zaandam / Almere",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Amsterdam",
+          addressCountry: "NL",
+        },
       },
-      {
-        "@type": "Offer",
-        name: "Pakket B – Meest gekozen",
-        price: "2035",
-        priceCurrency: "EUR",
-        description: "25 rijlessen inclusief CBR-praktijkexamen",
-      },
-    ],
+    },
   },
-};
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -132,6 +183,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <a href="#main-content" className="skip-to-content">
+          Ga naar hoofdinhoud
+        </a>
         <LazyMotion features={domAnimation}>{children}</LazyMotion>
         <Analytics />
       </body>

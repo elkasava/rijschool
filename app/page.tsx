@@ -17,7 +17,7 @@ const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"));
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <Navbar />
       <Hero />
       <Voordelen />
