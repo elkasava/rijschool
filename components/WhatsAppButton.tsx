@@ -4,7 +4,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { track } from "@vercel/analytics";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 
 // WhatsApp SVG icon
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -21,6 +21,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function WhatsAppButton() {
+  const content = useContent();
   const [showTooltip, setShowTooltip] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -61,16 +62,16 @@ export default function WhatsAppButton() {
               >
                 <button
                   onClick={() => setShowTooltip(false)}
-                  aria-label="Sluit melding"
+                  aria-label={content.ui.whatsApp.closeLabel}
                   className="absolute top-2 right-2 text-slate-400 hover:text-slate-600"
                 >
                   <X className="w-3 h-3" />
                 </button>
                 <p className="text-slate-800 text-sm font-semibold mb-0.5">
-                  Chat met ons! 👋
+                  {content.ui.whatsApp.tooltipTitle} 👋
                 </p>
                 <p className="text-slate-500 text-xs">
-                  Vragen? We reageren doorgaans binnen een uur.
+                  {content.ui.whatsApp.tooltipBody}
                 </p>
                 {/* Arrow */}
                 <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white border-r border-b border-slate-100 rotate-45" />
@@ -80,10 +81,10 @@ export default function WhatsAppButton() {
 
           {/* WhatsApp button */}
           <a
-            href={`https://wa.me/${content.algemeen.whatsapp}?text=Hallo%2C%20ik%20heb%20een%20vraag%20over%20jullie%20rijlessen.`}
+            href={`https://wa.me/${content.algemeen.whatsapp}?text=${encodeURIComponent(content.ui.whatsApp.defaultMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Chat met ons via WhatsApp"
+            aria-label={content.ui.whatsApp.buttonAriaLabel}
             onClick={() => {
               setShowTooltip(false);
               track("whatsapp_floating_click");

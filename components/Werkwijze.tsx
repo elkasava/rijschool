@@ -9,11 +9,10 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
 
 const iconMap: Record<string, LucideIcon> = { Car, BookOpen, GraduationCap, Award };
-const stappen = content.werkwijze.map((s) => ({ ...s, icon: iconMap[s.icon] ?? Car }));
 
 const colorMap: Record<string, { ring: string; bg: string; icon: string; dot: string; badge: string }> = {
   indigo: {
@@ -47,6 +46,9 @@ const colorMap: Record<string, { ring: string; bg: string; icon: string; dot: st
 };
 
 export default function Werkwijze() {
+  const content = useContent();
+  const stappen = content.werkwijze.map((s) => ({ ...s, icon: iconMap[s.icon] ?? Car }));
+
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const timelineLineRef = useRef<HTMLDivElement>(null);
@@ -160,14 +162,13 @@ export default function Werkwijze() {
           className="text-center mb-10 sm:mb-16"
         >
           <span className="inline-block text-brand-400 font-semibold text-sm uppercase tracking-widest mb-3">
-            Onze werkwijze
+            {content.ui.sections.werkwijze}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Van eerste les tot rijbewijs
+            {content.ui.werkwijze.sectionHeading}
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Een duidelijk en bewezen stappenplan dat jou zo efficiënt mogelijk
-            naar je rijbewijs brengt.
+            {content.ui.werkwijze.sectionSubheading}
           </p>
         </div>
 

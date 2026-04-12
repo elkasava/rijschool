@@ -15,24 +15,8 @@ import {
   Loader2,
 } from "lucide-react";
 import { track } from "@vercel/analytics";
-import siteContent from "@/data/content.json";
+import { useLanguage } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
-
-const { telefoon, telefoonLink, email, werkgebied, openingstijden, schoolNaam, whatsapp } = siteContent.algemeen;
-
-const interesseOpties = [
-  "Start Snel",
-  ...siteContent.pakketten
-    .map((p: { name: string }) => p.name)
-    .filter((name: string) => name !== "Start Snel"),
-];
-
-const contactInfo = [
-  { icon: Phone, label: "Telefoon", value: telefoon, href: `tel:${telefoonLink}` },
-  { icon: Mail, label: "E-mail", value: email, href: `mailto:${email}` },
-  { icon: MapPin, label: "Werkgebied", value: werkgebied, href: null as string | null },
-  { icon: Clock, label: "Openingstijden", value: openingstijden, href: null as string | null },
-];
 
 type FormFields = { naam: string; email: string; telefoon: string; bericht: string; datum: string; tijd: string };
 type FormErrors = Partial<Record<keyof FormFields, string>>;
@@ -45,29 +29,54 @@ function validateEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function validateForm(form: FormFields): FormErrors {
+// Validation is called with the i18n strings passed in so errors are always in the current language
+function validateForm(form: FormFields, ui: {
+  errorNaam: string; errorNaamMin: string;
+  errorEmail: string; errorEmailInvalid: string;
+  errorTelefoon: string; errorBericht: string; errorBerichtMin: string;
+}): FormErrors {
   const errors: FormErrors = {};
-  if (!form.naam.trim()) errors.naam = "Vul je naam in.";
-  else if (form.naam.trim().length < 2) errors.naam = "Naam moet minimaal 2 tekens zijn.";
+  if (!form.naam.trim()) errors.naam = ui.errorNaam;
+  else if (form.naam.trim().length < 2) errors.naam = ui.errorNaamMin;
 
-  if (!form.email.trim()) errors.email = "Vul je e-mailadres in.";
-  else if (!validateEmail(form.email)) errors.email = "Voer een geldig e-mailadres in.";
+  if (!form.email.trim()) errors.email = ui.errorEmail;
+  else if (!validateEmail(form.email)) errors.email = ui.errorEmailInvalid;
 
   if (form.telefoon && !/^[0-9()+\-\s]{6,20}$/.test(form.telefoon))
-    errors.telefoon = "Voer een geldig telefoonnummer in.";
+    errors.telefoon = ui.errorTelefoon;
 
-  if (!form.bericht.trim()) errors.bericht = "Schrijf een kort bericht.";
-  else if (form.bericht.trim().length < 10) errors.bericht = "Bericht moet minimaal 10 tekens zijn.";
+  if (!form.bericht.trim()) errors.bericht = ui.errorBericht;
+  else if (form.bericht.trim().length < 10) errors.bericht = ui.errorBerichtMin;
 
   return errors;
 }
 
 export default function Contact() {
+  const { lang, content: siteContent } = useLanguage();
+  const { telefoon, telefoonLink, email, werkgebied, openingstijden, schoolNaam, whatsapp } = siteContent.algemeen;
+
+  const ui = siteContent.ui.contact;
+
+  const interesseOpties = siteContent.pakketten.map((p: { name: string }) => p.name);
+
+  const contactInfo = [
+    { icon: Phone, label: ui.labelTelefoon2, value: telefoon, href: `tel:${telefoonLink}` },
+    { icon: Mail, label: ui.labelEmail2, value: email, href: `mailto:${email}` },
+    { icon: MapPin, label: ui.labelWerkgebied, value: werkgebied, href: null as string | null },
+    { icon: Clock, label: ui.labelOpeningstijden, value: openingstijden, href: null as string | null },
+  ];
+
   const [form, setForm] = useState<FormFields>({ naam: "", email: "", telefoon: "", bericht: "", datum: "", tijd: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-  const [interesse, setInteresse] = useState("Start Snel");
+  const [interesse, setInteresse] = useState(() => siteContent.pakketten[0]?.name ?? "");
+
+  // Reset selected package interest to first option when language switches
+  useEffect(() => {
+    setInteresse(siteContent.pakketten[0]?.name ?? "");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   const prefersReduced = useReducedMotion();
   const [formScope, animateShake] = useAnimate();
@@ -183,7 +192,7 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [name]: value }));
     // Re-validate field on change if already touched
     if (touched[name as keyof FormFields]) {
-      const newErrors = validateForm({ ...form, [name]: value });
+      const newErrors = validateForm({ ...form, [name]: value }, ui);
       setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormFields] }));
     }
   };
@@ -191,7 +200,7 @@ export default function Contact() {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
-    const newErrors = validateForm(form);
+    const newErrors = validateForm(form, ui);
     setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormFields] }));
   };
 
@@ -203,7 +212,7 @@ export default function Contact() {
       {} as Record<keyof FormFields, boolean>
     );
     setTouched(allTouched);
-    const validationErrors = validateForm(form);
+    const validationErrors = validateForm(form, ui);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
       if (!prefersReduced && formScope.current) {
@@ -224,14 +233,13 @@ export default function Contact() {
       tijd: sanitize(form.tijd),
     };
 
-    const msg =
-      `Hallo Rij2Go! 👋\n\n` +
-      `Naam: ${safe.naam}\n` +
-      `E-mail: ${safe.email}\n` +
-      `Telefoon: ${safe.telefoon || "niet opgegeven"}\n` +
-      `Interesse: ${interesse}\n` +
-      (safe.datum ? `Gewenste datum: ${safe.datum}${safe.tijd ? ` om ${safe.tijd}` : ""}\n` : "") +
-      `\nBericht:\n${safe.bericht}`;
+    const msg = ui.waMessageTemplate
+      .replace("{naam}", safe.naam)
+      .replace("{email}", safe.email)
+      .replace("{telefoon}", safe.telefoon || "—")
+      .replace("{interesse}", interesse)
+      .replace("{bericht}", safe.bericht)
+      + (safe.datum ? `\n${ui.labelDatum}: ${safe.datum}${safe.tijd ? ` ${safe.tijd}` : ""}` : "");
 
     window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
 
@@ -268,14 +276,13 @@ export default function Contact() {
           className="text-center mb-8 sm:mb-14"
         >
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
-            Contact
+            {siteContent.ui.sections.contact}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Begin vandaag nog
+            {ui.heading}
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Stel gerust een vraag of schrijf je in voor een pakket. We nemen
-            binnen 24 uur contact met je op.
+            {ui.subheading}
           </p>
         </div>
 
@@ -290,8 +297,7 @@ export default function Contact() {
                 {schoolNaam}
               </h3>
               <p className="text-slate-400 mb-8 text-sm leading-relaxed">
-                Wij geloven dat iedereen met de juiste begeleiding kan leren rijden.
-                Neem vandaag nog contact op en rij morgen al je eerste les!
+                {ui.infoSubheading}
               </p>
 
               <div className="space-y-5">
@@ -333,12 +339,12 @@ export default function Contact() {
               {/* Trust statements */}
               <div className="mt-10 pt-8 border-t border-slate-800 flex flex-col gap-4">
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  <span className="text-white font-semibold">Persoonlijk advies —</span>{" "}
-                  Niet zeker welk pakket bij jou past? Stuur een berichtje en we helpen je op weg.
+                  <span className="text-white font-semibold">{ui.personalAdviceTitle}</span>{" "}
+                  {ui.personalAdviceText}
                 </p>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  <span className="text-white font-semibold">Snel antwoord —</span>{" "}
-                  Stuur je bericht en we nemen binnen 24 uur contact op. Vaak al binnen een uur.
+                  <span className="text-white font-semibold">{ui.fastReplyTitle}</span>{" "}
+                  {ui.fastReplyText}
                 </p>
               </div>
             </div>
@@ -362,11 +368,10 @@ export default function Contact() {
                   <CheckCircle2 className="w-8 h-8 text-emerald-600" aria-hidden="true" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  Bericht verstuurd!
+                  {ui.successTitle}
                 </h3>
                 <p className="text-slate-500 text-sm max-w-sm">
-                  Bedankt voor je aanvraag, {form.naam}! We nemen zo snel
-                  mogelijk contact met je op, uiterlijk binnen 24 uur.
+                  {ui.successMsg}
                 </p>
               </m.div>
             ) : (
@@ -376,18 +381,18 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 noValidate
                 initial={false}
-                aria-label="Contactformulier – stuur een aanvraag"
+                aria-label={ui.formAriaLabel}
                 className="bg-slate-50 rounded-3xl p-8 lg:p-10 border border-slate-100"
               >
                 <h3 className="text-xl font-bold text-slate-900 mb-6">
-                  Stuur een bericht
+                  {ui.formTitle}
                 </h3>
 
                 <div className="space-y-4">
                   {/* Name */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="naam" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Naam <span className="text-rose-500" aria-hidden="true">*</span>
+                      {ui.labelNaam} <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <Input
                       id="naam"
@@ -395,7 +400,7 @@ export default function Contact() {
                       value={form.naam}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      placeholder="Jan de Vries"
+                      placeholder={ui.namePlaceholder}
                       required
                       aria-required="true"
                       aria-invalid={touched.naam && !!errors.naam}
@@ -408,7 +413,7 @@ export default function Contact() {
                   {/* Email */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      E-mailadres <span className="text-rose-500" aria-hidden="true">*</span>
+                      {ui.labelEmail} <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <Input
                       id="email"
@@ -417,7 +422,7 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      placeholder="jan@voorbeeld.nl"
+                      placeholder={ui.emailPlaceholder}
                       required
                       aria-required="true"
                       aria-invalid={touched.email && !!errors.email}
@@ -430,7 +435,7 @@ export default function Contact() {
                   {/* Phone */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="telefoon" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Telefoonnummer
+                      {ui.labelTelefoon}
                     </label>
                     <Input
                       id="telefoon"
@@ -439,7 +444,7 @@ export default function Contact() {
                       value={form.telefoon}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      placeholder="06-1234 5678"
+                      placeholder={ui.phonePlaceholder}
                       aria-invalid={touched.telefoon && !!errors.telefoon}
                       aria-describedby={errors.telefoon ? "telefoon-error" : undefined}
                       className={`bg-white border-slate-200 focus-visible:ring-brand-500 ${touched.telefoon && errors.telefoon ? "border-rose-400 focus-visible:ring-rose-400" : ""}`}
@@ -451,7 +456,7 @@ export default function Contact() {
                   <div data-field style={{ opacity: 0 }} className="grid grid-cols-2 gap-3">
                     <div>
                       <label htmlFor="datum" className="block text-sm font-medium text-slate-700 mb-1.5">
-                        Gewenste datum
+                        {ui.labelDatum}
                       </label>
                       <Input
                         id="datum"
@@ -465,17 +470,17 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="tijd" className="block text-sm font-medium text-slate-700 mb-1.5">
-                        Gewenste tijd
+                        {ui.labelTijd}
                       </label>
                       <select
                         id="tijd"
                         name="tijd"
                         value={form.tijd}
                         onChange={(e) => setForm({ ...form, tijd: e.target.value })}
-                        aria-label="Gewenste lestijd"
+                        aria-label={ui.labelTijd}
                         className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                       >
-                        <option value="">Kies tijd</option>
+                        <option value="">{ui.kiesTijd}</option>
                         {["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"].map((t) => (
                           <option key={t} value={t}>{t}</option>
                         ))}
@@ -486,7 +491,7 @@ export default function Contact() {
                   {/* Message */}
                   <div data-field style={{ opacity: 0 }}>
                     <label htmlFor="bericht" className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Bericht <span className="text-rose-500" aria-hidden="true">*</span>
+                      {ui.labelBericht} <span className="text-rose-500" aria-hidden="true">*</span>
                     </label>
                     <textarea
                       id="bericht"
@@ -494,7 +499,7 @@ export default function Contact() {
                       value={form.bericht}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      placeholder="Vertel ons meer over jezelf en je rijervaring..."
+                      placeholder={ui.messagePlaceholder}
                       required
                       aria-required="true"
                       aria-invalid={touched.bericht && !!errors.bericht}
@@ -509,7 +514,7 @@ export default function Contact() {
                   <div data-field style={{ opacity: 0 }}>
                     <fieldset>
                       <legend className="block text-sm font-medium text-slate-700 mb-2">
-                        Ik ben geïnteresseerd in
+                        {ui.labelInteresse}
                       </legend>
                       <div className="flex flex-wrap gap-2">
                         {interesseOpties.map((opt) => (
@@ -545,31 +550,31 @@ export default function Contact() {
                     type="submit"
                     size="lg"
                     disabled={status === "sending"}
-                    aria-label="Verstuur aanvraag via WhatsApp"
+                    aria-label={ui.whatsappAria}
                     className="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/20 gap-2"
                   >
                     {status === "sending" ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                        Versturen…
+                        {ui.sending}
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" aria-hidden="true" />
-                        Verstuur Aanvraag
+                        {ui.sendButton}
                       </>
                     )}
                   </Button>
                 </m.div>
 
                 <p className="text-slate-400 text-xs text-center mt-3">
-                  We reageren altijd binnen 24 uur. Liever direct contact?{" "}
+                  {ui.formFooter}{" "}
                   <a
                     href={`tel:${telefoonLink}`}
                     className="text-brand-600 hover:underline"
                     onClick={() => track("contact_phone_click")}
                   >
-                    Bel ons
+                    {ui.callUs}
                   </a>
                   .
                 </p>

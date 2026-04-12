@@ -1,0 +1,488 @@
+{
+  "algemeen": {
+    "schoolNaam": "Driving School Rij2Go",
+    "telefoon": "06-4069 5738",
+    "telefoonLink": "+31640695738",
+    "email": "info@rij2go.nl",
+    "whatsapp": "31640695738",
+    "werkgebied": "Amsterdam, Zaandam, Almere",
+    "openingstijden": "Mon–Sat: 08:00 – 20:00"
+  },
+  "hero": {
+    "beoordeling": "9.2 / 10",
+    "stats": [
+      { "value": "10+", "label": "Years experience" },
+      { "value": "200+", "label": "Happy students" }
+    ],
+    "subtext": "At Rij2Go you learn to drive at your own pace. Personal attention, modern lesson cars and flexible lesson times that fit your schedule. Active in Amsterdam, Zaandam and Almere.",
+    "checkmarks": ["Personal guidance", "Manual & Automatic", "Flexible scheduling"],
+    "autoMerk": "Modern Lesson Car",
+    "autoType": "Automatic & Manual",
+    "autoFeatures": ["Air conditioning", "Dual control", "Safe & comfortable", "Latest technology"]
+  },
+  "pakketten": [
+    {
+      "name": "Quick Start",
+      "tag": "Fast choice",
+      "price": "€ 680",
+      "priceNote": "excl. CBR exam",
+      "lessen": "10 lessons",
+      "duration": "60 minutes each",
+      "korting": "",
+      "description": "Get started right away with 10 lessons of 60 minutes. Ideal if you already have some driving experience.",
+      "features": [
+        "10 practical lessons (60 min)",
+        "Manual or Automatic",
+        "Theory support",
+        "Digital lesson portfolio",
+        "No registration fees"
+      ],
+      "highlight": false,
+      "accent": "pink",
+      "cta": "Sign Up"
+    },
+    {
+      "name": "Package A",
+      "tag": "",
+      "price": "€ 1.349",
+      "priceNote": "incl. CBR exam",
+      "lessen": "15 lessons",
+      "duration": "60 minutes each",
+      "korting": "CBR exam included",
+      "description": "15 lessons of 60 minutes. Ideal for students with a little driving experience.",
+      "features": [
+        "15 practical lessons (60 min)",
+        "Manual or Automatic",
+        "Exam preparation",
+        "CBR practical exam included",
+        "No registration fees"
+      ],
+      "highlight": false,
+      "cta": "Choose Package A"
+    },
+    {
+      "name": "Package B",
+      "tag": "Most popular",
+      "price": "€ 1.999",
+      "priceNote": "incl. CBR exam",
+      "lessen": "25 lessons",
+      "duration": "60 minutes each",
+      "korting": "CBR exam included",
+      "description": "The perfect package for most students. 25 lessons of 60 min including CBR exam.",
+      "features": [
+        "25 practical lessons (60 min)",
+        "CBR practical exam included",
+        "Manual or Automatic",
+        "Exam preparation",
+        "CBR exam registration"
+      ],
+      "highlight": true,
+      "cta": "Choose Package B"
+    },
+    {
+      "name": "Package C",
+      "tag": "",
+      "price": "€ 2.600",
+      "priceNote": "incl. CBR exam",
+      "lessen": "35 lessons",
+      "duration": "60 minutes each",
+      "korting": "CBR exam included",
+      "description": "Thorough practice with 35 lessons of 60 min. Including CBR practical exam.",
+      "features": [
+        "35 practical lessons (60 min)",
+        "CBR practical exam included",
+        "Manual or Automatic",
+        "Intensive exam training",
+        "CBR exam registration"
+      ],
+      "highlight": false,
+      "cta": "Choose Package C"
+    },
+    {
+      "name": "Package D",
+      "tag": "Most complete",
+      "price": "€ 3.200",
+      "priceNote": "incl. exam + resit",
+      "lessen": "45 lessons",
+      "duration": "60 minutes each",
+      "korting": "Exam and resit included",
+      "description": "Maximum support. 45 lessons of 60 min including CBR exam and free resit.",
+      "features": [
+        "45 practical lessons (60 min)",
+        "CBR practical exam included",
+        "Resit included",
+        "Manual or Automatic",
+        "Intensive exam training",
+        "Priority scheduling"
+      ],
+      "highlight": false,
+      "cta": "Choose Package D"
+    }
+  ],
+  "losseTarieven": [
+    { "label": "Single lesson (60 min)", "prijs": "€ 70" },
+    { "label": "Interim theory test", "prijs": "€ 305" },
+    { "label": "Practical exam", "prijs": "€ 349" },
+    { "label": "Resit exam", "prijs": "€ 349" },
+    { "label": "Faalangstexamen", "prijs": "€ 449" }
+  ],
+  "faq": [
+    {
+      "vraag": "How much does a single driving lesson cost?",
+      "antwoord": "A single 60-minute lesson costs €70. However, we recommend choosing a package, because the larger the package, the bigger the discount. Contact us and we will advise you which package suits you best."
+    },
+    {
+      "vraag": "In which areas do you provide driving lessons?",
+      "antwoord": "We provide driving lessons in Amsterdam, Zaandam and Almere. We pick you up at an agreed location: at home, at work or at the bus stop. Not sure if we operate in your area? Drop us a message on WhatsApp!"
+    },
+    {
+      "vraag": "How long does it take on average to pass my driving exam?",
+      "antwoord": "That differs per person. On average, our students get their licence after 20 to 30 lessons. Some students are ready after 15 lessons, others need 40. Together we draw up an honest and realistic learning plan."
+    },
+    {
+      "vraag": "Can I also take lessons in an automatic car?",
+      "antwoord": "Yes, absolutely! We offer lessons in both a manual and an automatic car. Please note that an automatic licence does not permit you to drive a manual car. We will discuss together what is the best choice for you."
+    },
+    {
+      "vraag": "What if I fail my driving exam?",
+      "antwoord": "Didn't pass? Don't panic — it happens to the best of us. We analyse the feedback report from the CBR together and train specifically on the points that need improvement. A resit costs €349. The larger your package, the better prepared you are — and the smaller the chance of a resit."
+    },
+    {
+      "vraag": "Can I cancel or reschedule lessons?",
+      "antwoord": "Yes, you can cancel or reschedule lessons free of charge up to 48 hours in advance. For cancellations within 48 hours we charge a fee of €29. We understand that life sometimes takes a different turn — just let us know in time."
+    },
+    {
+      "vraag": "When do I need to take my theory exam?",
+      "antwoord": "The CBR requires you to pass your theory exam before you can take your practical exam. We recommend starting to study for theory as early as possible — ideally at the same time as your first practical lessons. That way you won't fall behind when you are ready for the driving exam."
+    },
+    {
+      "vraag": "From what age can I take driving lessons?",
+      "antwoord": "You can take your theory exam from age 16. Driving lessons start from age 16.5 and you may take your practical exam from age 17. Want to start as early as possible? Get in touch — we will plan everything as efficiently as possible for you."
+    },
+    {
+      "vraag": "Do you also offer support for students with driving anxiety or ADHD?",
+      "antwoord": "Absolutely. Our instructors have experience with students who suffer from driving anxiety, exam nerves, ADHD or autism. We fully adapt the lesson pace, communication style and approach to your situation. Gradually building confidence, step by step — so you enter your exam with confidence."
+    },
+    {
+      "vraag": "Are lessons available in English?",
+      "antwoord": "Yes! Do you live in Amsterdam, Zaandam or Almere but prefer to speak English? No problem. We also provide lessons in English. Contact us via WhatsApp or email — we will find the best matching instructor for you."
+    },
+    {
+      "vraag": "How long is a lesson and can I take longer lessons?",
+      "antwoord": "A standard lesson at Rij2Go lasts 60 minutes. In consultation it is also possible to plan longer lessons of 90 or 120 minutes — ideal if you want to progress quickly or want an intensive preparation for your exam. Just discuss this with your instructor."
+    }
+  ],
+  "voordelen": [
+    {
+      "icon": "Heart",
+      "title": "Personal Attention",
+      "description": "At Rij2Go, you are central. Our experienced instructors adapt to your pace and learning style. Whether you are a beginner or already have some experience, you always feel at ease.",
+      "color": "text-rose-400",
+      "bg": "bg-rose-400/10"
+    },
+    {
+      "icon": "Zap",
+      "title": "Modern Lesson Cars",
+      "description": "We drive exclusively in modern, safe vehicles fully equipped with the latest technology. Comfortable, reliable and with dual controls for extra safety.",
+      "color": "text-brand-400",
+      "bg": "bg-brand-400/10"
+    },
+    {
+      "icon": "Clock",
+      "title": "Flexible Lesson Times",
+      "description": "Schedule your lessons whenever it suits you. Evening, weekend and morning lessons are all possible in Amsterdam, Zaandam and Almere. We adapt to your agenda.",
+      "color": "text-sky-400",
+      "bg": "bg-sky-400/10"
+    },
+    {
+      "icon": "ThumbsUp",
+      "title": "Fast Lesson Packages",
+      "description": "Want to get your licence as quickly as possible? Our intensive packages are specially designed for students who want to drive efficiently and purposefully towards their licence.",
+      "color": "text-violet-400",
+      "bg": "bg-violet-400/10"
+    }
+  ],
+  "specialeBegeleiding": [
+    {
+      "icon": "Brain",
+      "title": "ADHD & Autism",
+      "description": "Our instructors are trained in guiding students with ADHD or autism. We fully adapt the lesson pace, instruction style and structure to your needs. You drive your way — we provide the right approach.",
+      "tag": "Specialised guidance",
+      "color": "text-violet-500",
+      "bg": "bg-violet-50",
+      "border": "border-violet-100"
+    },
+    {
+      "icon": "HeartHandshake",
+      "title": "Driving Anxiety & Exam Nerves",
+      "description": "Suffering from driving anxiety or nerves before your exam? We start calmly, build confidence step by step and practise in a safe environment. Many of our students who had previously failed passed with us.",
+      "tag": "Calm & safe approach",
+      "color": "text-rose-500",
+      "bg": "bg-rose-50",
+      "border": "border-rose-100"
+    },
+    {
+      "icon": "Settings2",
+      "title": "Automatic Licence",
+      "description": "Prefer an automatic? We understand. Automatic transmission lessons are available in all our packages — for the same price. We help you choose: automatic or manual, what suits you best?",
+      "tag": "All packages available",
+      "color": "text-brand-600",
+      "bg": "bg-brand-50",
+      "border": "border-brand-100"
+    },
+    {
+      "icon": "Globe",
+      "title": "Lessons in English",
+      "description": "Do you live in Amsterdam, Zaandam or Almere but prefer to speak English? No problem. We offer driving lessons in English, so the language barrier is no obstacle on the way to your licence.",
+      "tag": "English lessons available",
+      "color": "text-emerald-600",
+      "bg": "bg-emerald-50",
+      "border": "border-emerald-100"
+    }
+  ],
+  "instructeurs": [
+    {
+      "naam": "Fee",
+      "titel": "Senior Driving Instructor & Owner",
+      "ervaring": "12 years",
+      "talen": ["Dutch", "English", "Arabic"],
+      "specialisaties": ["ADHD & Autism", "Driving anxiety", "Automatic licence"],
+      "beschrijving": "Fee became a driving instructor because she believes that everyone, regardless of background or challenge, can learn to drive. With more than 12 years of experience she has guided hundreds of students — from beginners to people who had failed multiple times. Her calm approach and clear explanations make her especially popular with students with driving anxiety or ADHD.",
+      "stats": { "leerlingen": "800+", "slagingspercentage": "97%" }
+    },
+    {
+      "naam": "Fee",
+      "titel": "Driving Instructor",
+      "ervaring": "6 years",
+      "talen": ["Dutch", "English", "French"],
+      "specialisaties": ["Female students", "Exam training", "Manual transmission"],
+      "beschrijving": "Fee is known for her patience and structured approach. She works intensively on exam training and knows exactly what the CBR looks for. Many of her students pass on the first attempt. She speaks fluent Dutch, English and French.",
+      "stats": { "leerlingen": "400+", "slagingspercentage": "95%" }
+    }
+  ],
+  "testimonials": [
+    {
+      "naam": "Chidera",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Package B",
+      "tekst": "After two failed attempts at another driving school I tried Rij2Go. What a difference! The instructor explained everything calmly and had a lot of patience. After 20 lessons I passed first time. Absolutely recommended!"
+    },
+    {
+      "naam": "Lizzy",
+      "locatie": "Zaandam",
+      "beoordeling": 5,
+      "pakket": "Package A",
+      "tekst": "Great driving school. I suffered from driving anxiety but it has completely disappeared thanks to the calm approach. Done in 15 lessons, passed immediately. The best investment I have made!"
+    },
+    {
+      "naam": "Ekow",
+      "locatie": "Almere",
+      "beoordeling": 5,
+      "pakket": "Package B",
+      "tekst": "Fee is truly a top instructor. She knows exactly what to pay attention to for the CBR exam. I felt super well prepared. Passed first time! The price is also very fair."
+    },
+    {
+      "naam": "Leffy",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Package C",
+      "tekst": "I have ADHD and was worried that would be a problem, but the instructor adapted his style perfectly to me. Short instructions, lots of repetition. Eventually passed after 32 lessons. Super happy!"
+    },
+    {
+      "naam": "Rajob Pashul",
+      "locatie": "Amsterdam",
+      "beoordeling": 5,
+      "pakket": "Quick Start",
+      "tekst": "I already had driving experience from abroad and wanted to get my Dutch licence quickly. The first lesson was immediately clear and honest about what I needed. Passed after 12 lessons. Top service!"
+    },
+    {
+      "naam": "Kevin",
+      "locatie": "Zaandam",
+      "beoordeling": 5,
+      "pakket": "Package B",
+      "tekst": "Flexible lesson times are truly a must when you work full time. I could come in the evenings and at weekends. Instructor always on time, professional and motivating. Passed first time!"
+    }
+  ],
+  "werkwijze": [
+    {
+      "nummer": "01",
+      "icon": "Car",
+      "title": "Introduction",
+      "description": "We start with a first 60-minute lesson. You get to know your instructor, we drive together and draw up a personal learning plan.",
+      "details": ["60 minutes", "Personal learning plan", "No obligations"],
+      "color": "indigo"
+    },
+    {
+      "nummer": "02",
+      "icon": "BookOpen",
+      "title": "Theory Study",
+      "description": "While you take practical lessons, you also prepare for the theory exam. We offer online theory support, practice exams and tips to pass quickly.",
+      "details": ["Online practice exams", "Digital study materials", "At your own pace"],
+      "color": "violet"
+    },
+    {
+      "nummer": "03",
+      "icon": "GraduationCap",
+      "title": "Practical Lessons",
+      "description": "You take tailor-made lessons — from basic skills to complex traffic situations. We train you specifically for the CBR exam requirements in Amsterdam, Zaandam or Almere.",
+      "details": ["Tailor-made lessons", "Exam routes", "Regular feedback"],
+      "color": "sky"
+    },
+    {
+      "nummer": "04",
+      "icon": "Award",
+      "title": "Pass Your Exam!",
+      "description": "When you are ready, we guide your CBR exam registration and drive the exam route together. After obtaining your licence you are truly ready for the road.",
+      "details": ["CBR guidance", "Exam training", "Licence in hand!"],
+      "color": "emerald"
+    }
+  ],
+  "ui": {
+    "hero": {
+      "rated": "Rated",
+      "heading1": "Get your driving licence",
+      "heading2": "with confidence",
+      "ctaPrimary": "Book a Lesson",
+      "ctaSecondary": "View Packages",
+      "avgRating": "Average rating",
+      "justPassed": "Just passed!",
+      "studentIn": "Student in Amsterdam",
+      "timeAgo": "2h ago"
+    },
+    "nav": {
+      "packages": "Packages",
+      "reviews": "Reviews",
+      "theory": "Online Theory",
+      "contact": "Contact",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "sections": {
+      "voordelen": "Why Rij2Go?",
+      "specialeBegeleiding": "Specialist Guidance",
+      "pakketten": "Our Packages",
+      "instructeurs": "Our Instructors",
+      "testimonials": "What Students Say",
+      "werkwijze": "How It Works",
+      "faq": "Frequently Asked Questions",
+      "contact": "Get In Touch"
+    },
+    "voordelen": {
+      "heading1": "Everything for",
+      "heading2": "your success"
+    },
+    "testimonials": {
+      "heading": "What our students say",
+      "ratingBasis": "based on 200+ reviews"
+    },
+    "pakketten": {
+      "advice": "Not sure? Contact us for personal advice.",
+      "heading": "Choose your package",
+      "subtext": "Transparent prices with no hidden costs. The more lessons, the bigger the discount.",
+      "perLesson": "per lesson",
+      "included": "Included",
+      "looseTarieven": "Individual Rates",
+      "looseTarievenDesc": "Individual lessons, exams and tests — without a package.",
+      "mostChosen": "Most popular"
+    },
+    "pakketten2": {
+      "termsLink": "View our terms and conditions",
+      "maatwerkAdvice": "Custom options available — contact us for personal advice."
+    },
+    "instructeurs": {
+      "ervaring": "Years experience",
+      "talen": "Languages",
+      "specialisaties": "Specialisations",
+      "leerlingen": "Students",
+      "slagingspercentage": "Pass rate",
+      "sectionHeading": "Meet your instructor",
+      "sectionSubheading": "Experienced, patient and certified. Your instructor is always there for you."
+    },
+    "werkwijze": {
+      "sectionHeading": "From first lesson to licence",
+      "sectionSubheading": "A clear, proven step-by-step plan that gets you to your licence as efficiently as possible."
+    },
+    "cta": {
+      "heading": "Ready to get started?",
+      "sub": "Book your first driving lesson today.",
+      "btnPrimary": "Book a Lesson",
+      "btnSecondary": "Call us",
+      "line1": "Your licence starts with",
+      "line2": "one driving lesson",
+      "subtext": "A no-obligation introduction with our instructor. No commitments, just a personal driving plan tailored to you.",
+      "whatsappBtn": "WhatsApp us",
+      "callBtn": "Or call directly"
+    },
+    "contact": {
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "Your email address",
+      "phonePlaceholder": "Your phone number",
+      "messagePlaceholder": "Your message...",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "successTitle": "Message sent!",
+      "successMsg": "We will get back to you as soon as possible.",
+      "errorMsg": "Something went wrong. Please try again.",
+      "labelTelefoon2": "Phone",
+      "labelEmail2": "Email",
+      "labelWerkgebied": "Service area",
+      "labelOpeningstijden": "Opening hours",
+      "callUs": "Call us",
+      "whatsappAria": "Send request via WhatsApp",
+      "heading": "Start today",
+      "subheading": "Feel free to ask a question or sign up for a package. We will get back to you within 24 hours.",
+      "infoSubheading": "We believe everyone can learn to drive with the right guidance. Get in touch today and take your first lesson tomorrow!",
+      "personalAdviceTitle": "Personal advice —",
+      "personalAdviceText": "Not sure which package suits you? Send us a message and we'll help you out.",
+      "fastReplyTitle": "Fast reply —",
+      "fastReplyText": "Send your message and we'll get back to you within 24 hours. Often within an hour.",
+      "formTitle": "Send a message",
+      "formFooter": "We always reply within 24 hours. Prefer direct contact?",
+      "labelNaam": "Name",
+      "labelEmail": "Email address",
+      "labelTelefoon": "Phone number",
+      "labelDatum": "Preferred date",
+      "labelTijd": "Preferred time",
+      "labelBericht": "Message",
+      "labelInteresse": "I am interested in",
+      "kiesTijd": "Choose time",
+      "errorNaam": "Please enter your name.",
+      "errorNaamMin": "Name must be at least 2 characters.",
+      "errorEmail": "Please enter your email address.",
+      "errorEmailInvalid": "Please enter a valid email address.",
+      "errorTelefoon": "Please enter a valid phone number.",
+      "errorBericht": "Please write a short message.",
+      "errorBerichtMin": "Message must be at least 10 characters.",
+      "formAriaLabel": "Contact form – send a request",
+      "waMessageTemplate": "Hello Rij2Go! 👋\n\nName: {naam}\nEmail: {email}\nPhone: {telefoon}\nInterest: {interesse}\n\nMessage:\n{bericht}"
+    },
+    "specialeBegeleiding": {
+      "sectionLabel": "For everyone",
+      "sectionHeading": "Driving lessons tailored to you",
+      "sectionSubheading": "Everyone learns differently. Whether you have driving anxiety, ADHD, prefer automatic, or want lessons in English — at Rij2Go you'll always find the right approach.",
+      "ctaText": "Do you have a specific question or special situation?",
+      "ctaSub": "We are happy to think along with you — completely free of obligation.",
+      "ctaBtn": "Send a WhatsApp"
+    },
+    "faq": {
+      "heading": "Your questions, our answers",
+      "notListed": "Can't find your question? Send us a message via WhatsApp — we reply within an hour.",
+      "stillQuestion": "Still have a question?",
+      "replyTime": "We reply within an hour via WhatsApp",
+      "appButton": "Message us"
+    },
+    "whatsApp": {
+      "tooltipTitle": "Chat with us!",
+      "tooltipBody": "Questions? We usually reply within an hour.",
+      "closeLabel": "Close notification",
+      "buttonAriaLabel": "Chat with us via WhatsApp",
+      "defaultMessage": "Hello, I have a question about your driving lessons."
+    },
+    "footer": {
+      "rights": "All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
+  }
+}

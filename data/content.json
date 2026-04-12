@@ -11,7 +11,6 @@
   "hero": {
     "beoordeling": "9.2 / 10",
     "stats": [
-      { "value": "96%", "label": "Slagingspercentage" },
       { "value": "10+", "label": "Jaar ervaring" },
       { "value": "200+", "label": "Tevreden leerlingen" }
     ],
@@ -122,11 +121,10 @@
   ],
   "losseTarieven": [
     { "label": "Losse rijles (60 min)", "prijs": "€ 70" },
-    { "label": "Tussenevaluatie", "prijs": "€ 249" },
+    { "label": "Tussentijdse toets", "prijs": "€ 305" },
     { "label": "Praktijkexamen", "prijs": "€ 349" },
     { "label": "Herexamen", "prijs": "€ 349" },
-    { "label": "Angstrijexamen", "prijs": "€ 449" },
-    { "label": "Nader onderzoek", "prijs": "€ 425" }
+    { "label": "Faalangstexamen", "prijs": "€ 449" }
   ],
   "faq": [
     {
@@ -244,21 +242,21 @@
   ],
   "instructeurs": [
     {
-      "naam": "Youssef El Mouloudi",
+      "naam": "Fee",
       "titel": "Senior Rij-instructeur & Eigenaar",
       "ervaring": "12 jaar",
       "talen": ["Nederlands", "Engels", "Arabisch"],
       "specialisaties": ["ADHD & Autisme", "Rijangst", "Automaat rijbewijs"],
-      "beschrijving": "Youssef begon als rij-instructeur omdat hij gelooft dat iedereen, ongeacht achtergrond of uitdaging, kan leren rijden. Met meer dan 12 jaar ervaring heeft hij honderden leerlingen begeleid — van beginners tot mensen die al meerdere keren waren gezakt. Zijn rustige aanpak en heldere uitleg maken hem bijzonder populair bij leerlingen met rijangst of ADHD.",
+      "beschrijving": "Fee begon als rij-instructeur omdat zij gelooft dat iedereen, ongeacht achtergrond of uitdaging, kan leren rijden. Met meer dan 12 jaar ervaring heeft zij honderden leerlingen begeleid — van beginners tot mensen die al meerdere keren waren gezakt. Haar rustige aanpak en heldere uitleg maken haar bijzonder populair bij leerlingen met rijangst of ADHD.",
       "stats": { "leerlingen": "800+", "slagingspercentage": "97%" }
     },
     {
-      "naam": "Fatima Zahra Idrissi",
+      "naam": "Fee",
       "titel": "Rij-instructeur",
       "ervaring": "6 jaar",
       "talen": ["Nederlands", "Engels", "Frans"],
       "specialisaties": ["Vrouwelijke leerlingen", "Examentraining", "Handgeschakeld"],
-      "beschrijving": "Fatima staat bekend om haar geduld en structurele aanpak. Ze werkt intensief aan examentraining en weet precies waar het CBR op let. Veel van haar leerlingen slagen al bij de eerste poging. Ze spreekt vloeiend Nederlands, Engels en Frans.",
+      "beschrijving": "Fee staat bekend om haar geduld en structurele aanpak. Ze werkt intensief aan examentraining en weet precies waar het CBR op let. Veel van haar leerlingen slagen al bij de eerste poging. Ze spreekt vloeiend Nederlands, Engels en Frans.",
       "stats": { "leerlingen": "400+", "slagingspercentage": "95%" }
     }
   ],
@@ -299,7 +297,7 @@
       "tekst": "Had al rijervaring uit het buitenland en wilde snel mijn Nederlandse rijbewijs. De eerste les was gelijk duidelijk en eerlijk over wat ik nodig had. Na 12 lessen geslaagd. Top service!"
     },
     {
-      "naam": "Leffy",
+      "naam": "Kevin",
       "locatie": "Zaandam",
       "beoordeling": 5,
       "pakket": "Pakket B",
@@ -339,5 +337,152 @@
       "details": ["CBR-begeleiding", "Examentraining", "Rijbewijs op zak!"],
       "color": "emerald"
     }
-  ]
+  ],
+  "ui": {
+    "hero": {
+      "rated": "Beoordeeld met",
+      "heading1": "Haal je rijbewijs",
+      "heading2": "met zelfvertrouwen",
+      "ctaPrimary": "Rijles Aanvragen",
+      "ctaSecondary": "Bekijk Pakketten",
+      "avgRating": "Gemiddelde beoordeling",
+      "justPassed": "Zojuist geslaagd!",
+      "studentIn": "Leerling in Amsterdam",
+      "timeAgo": "2u geleden"
+    },
+    "nav": {
+      "packages": "Pakketten",
+      "reviews": "Reviews",
+      "theory": "Online Praktijk",
+      "contact": "Contact",
+      "openMenu": "Menu openen",
+      "closeMenu": "Menu sluiten"
+    },
+    "sections": {
+      "voordelen": "Waarom Rij2Go?",
+      "specialeBegeleiding": "Speciale Begeleiding",
+      "pakketten": "Onze Pakketten",
+      "instructeurs": "Onze Instructeurs",
+      "testimonials": "Wat Leerlingen Zeggen",
+      "werkwijze": "Hoe Werkt Het?",
+      "faq": "Veelgestelde Vragen",
+      "contact": "Neem Contact Op"
+    },
+    "voordelen": {
+      "heading1": "Alles voor",
+      "heading2": "jouw succes"
+    },
+    "testimonials": {
+      "heading": "Wat onze leerlingen zeggen",
+      "ratingBasis": "op basis van 200+ beoordelingen"
+    },
+    "pakketten": {
+      "advice": "Twijfel je? Neem contact op voor persoonlijk advies.",
+      "heading": "Kies jouw pakket",
+      "subtext": "Transparante prijzen zonder verborgen kosten. Hoe meer lessen, hoe groter de korting.",
+      "perLesson": "per les",
+      "included": "Inbegrepen",
+      "looseTarieven": "Losse Tarieven",
+      "looseTarievenDesc": "Individuele lessen, examens en toetsen — zonder pakket.",
+      "mostChosen": "Meest gekozen"
+    },
+    "pakketten2": {
+      "termsLink": "Bekijk onze algemene voorwaarden",
+      "maatwerkAdvice": "Maatwerk mogelijk — neem contact op voor persoonlijk advies."
+    },
+    "instructeurs": {
+      "ervaring": "Jaar ervaring",
+      "talen": "Talen",
+      "specialisaties": "Specialisaties",
+      "leerlingen": "Leerlingen",
+      "slagingspercentage": "Slagingspercentage",
+      "sectionHeading": "Maak kennis met je instructeur",
+      "sectionSubheading": "Ervaren, geduldig en gecertificeerd. Jouw instructeur staat altijd voor je klaar."
+    },
+    "werkwijze": {
+      "sectionHeading": "Van eerste les tot rijbewijs",
+      "sectionSubheading": "Een duidelijk en bewezen stappenplan dat jou zo efficiënt mogelijk naar je rijbewijs brengt."
+    },
+    "cta": {
+      "heading": "Klaar om te beginnen?",
+      "sub": "Plan vandaag nog je eerste rijles.",
+      "btnPrimary": "Rijles Aanvragen",
+      "btnSecondary": "Bel ons",
+      "line1": "Jouw rijbewijs begint met",
+      "line2": "één rijles",
+      "subtext": "Vrijblijvend kennismaken met onze instructeur. Geen verplichtingen, wel een persoonlijk rijplan dat bij jou past.",
+      "whatsappBtn": "WhatsApp ons",
+      "callBtn": "Of bel direct"
+    },
+    "contact": {
+      "namePlaceholder": "Jouw naam",
+      "emailPlaceholder": "Jouw e-mailadres",
+      "phonePlaceholder": "Jouw telefoonnummer",
+      "messagePlaceholder": "Jouw bericht...",
+      "sendButton": "Verstuur Bericht",
+      "sending": "Versturen...",
+      "successTitle": "Bericht verstuurd!",
+      "successMsg": "We nemen zo snel mogelijk contact met je op.",
+      "errorMsg": "Er ging iets mis. Probeer het opnieuw.",
+      "labelTelefoon2": "Telefoon",
+      "labelEmail2": "E-mail",
+      "labelWerkgebied": "Werkgebied",
+      "labelOpeningstijden": "Openingstijden",
+      "callUs": "Bel ons",
+      "whatsappAria": "Verstuur aanvraag via WhatsApp",
+      "heading": "Begin vandaag nog",
+      "subheading": "Stel gerust een vraag of schrijf je in voor een pakket. We nemen binnen 24 uur contact met je op.",
+      "infoSubheading": "Wij geloven dat iedereen met de juiste begeleiding kan leren rijden. Neem vandaag nog contact op en rij morgen al je eerste les!",
+      "personalAdviceTitle": "Persoonlijk advies —",
+      "personalAdviceText": "Niet zeker welk pakket bij jou past? Stuur een berichtje en we helpen je op weg.",
+      "fastReplyTitle": "Snel antwoord —",
+      "fastReplyText": "Stuur je bericht en we nemen binnen 24 uur contact op. Vaak al binnen een uur.",
+      "formTitle": "Stuur een bericht",
+      "formFooter": "We reageren altijd binnen 24 uur. Liever direct contact?",
+      "labelNaam": "Naam",
+      "labelEmail": "E-mailadres",
+      "labelTelefoon": "Telefoonnummer",
+      "labelDatum": "Gewenste datum",
+      "labelTijd": "Gewenste tijd",
+      "labelBericht": "Bericht",
+      "labelInteresse": "Ik ben geïnteresseerd in",
+      "kiesTijd": "Kies tijd",
+      "errorNaam": "Vul je naam in.",
+      "errorNaamMin": "Naam moet minimaal 2 tekens zijn.",
+      "errorEmail": "Vul je e-mailadres in.",
+      "errorEmailInvalid": "Voer een geldig e-mailadres in.",
+      "errorTelefoon": "Voer een geldig telefoonnummer in.",
+      "errorBericht": "Schrijf een kort bericht.",
+      "errorBerichtMin": "Bericht moet minimaal 10 tekens zijn.",
+      "formAriaLabel": "Contactformulier – stuur een aanvraag",
+      "waMessageTemplate": "Hallo Rij2Go! 👋\n\nNaam: {naam}\nE-mail: {email}\nTelefoon: {telefoon}\nInteresse: {interesse}\n\nBericht:\n{bericht}"
+    },
+    "specialeBegeleiding": {
+      "sectionLabel": "Voor iedereen",
+      "sectionHeading": "Rijlessen op maat",
+      "sectionSubheading": "Iedereen leert anders. Of je nu rijangst hebt, ADHD, liever automatisch rijdt of les wilt in het Engels — bij Rij2Go vind je altijd een passende aanpak.",
+      "ctaText": "Heb je een specifieke vraag of bijzondere situatie?",
+      "ctaSub": "We denken graag met je mee — geheel vrijblijvend.",
+      "ctaBtn": "Stuur een WhatsApp"
+    },
+    "faq": {
+      "heading": "Jouw vragen, onze antwoorden",
+      "notListed": "Staat jouw vraag er niet bij? Stuur ons dan een bericht via WhatsApp — we antwoorden binnen een uur.",
+      "stillQuestion": "Nog een vraag?",
+      "replyTime": "We reageren binnen een uur via WhatsApp",
+      "appButton": "App ons"
+    },
+    "whatsApp": {
+      "tooltipTitle": "Chat met ons!",
+      "tooltipBody": "Vragen? We reageren doorgaans binnen een uur.",
+      "closeLabel": "Sluit melding",
+      "buttonAriaLabel": "Chat met ons via WhatsApp",
+      "defaultMessage": "Hallo, ik heb een vraag over jullie rijlessen."
+    },
+    "footer": {
+      "rights": "Alle rechten voorbehouden.",
+      "privacy": "Privacybeleid",
+      "terms": "Algemene Voorwaarden"
+    }
+  }
 }

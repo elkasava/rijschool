@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { Heart } from "lucide-react";
-import content from "@/data/content.json";
-
-const { schoolNaam } = content.algemeen;
+import { useContent } from "@/lib/LanguageContext";
 
 export default function Footer() {
+  const content = useContent();
+  const { schoolNaam } = content.algemeen;
   const year = new Date().getFullYear();
 
   return (
@@ -25,25 +27,25 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-slate-500 text-xs">
             <a href="#pakketten" className="hover:text-white transition-colors">
-              Pakketten
+              {content.ui.nav.packages}
             </a>
             <a href="#werkwijze" className="hover:text-white transition-colors">
-              Werkwijze
+              {content.ui.sections.werkwijze}
             </a>
             <a href="/oefentheorie" className="hover:text-white transition-colors">
-              Online Praktijk
+              {content.ui.nav.theory}
             </a>
             <a href="#contact" className="hover:text-white transition-colors">
-              Contact
+              {content.ui.nav.contact}
             </a>
             <a href="#" className="hover:text-white transition-colors">
-              Privacybeleid
+              {content.ui.footer.privacy}
             </a>
           </div>
 
           {/* Copyright */}
           <p className="text-slate-600 text-xs flex items-center gap-1">
-            © {year} {schoolNaam}. Gemaakt met{" "}
+            © {year} {schoolNaam}. {content.ui.footer.rights}{" "}
             <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
           </p>
         </div>

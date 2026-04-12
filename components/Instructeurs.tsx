@@ -2,12 +2,12 @@
 
 import { useRef, useEffect } from "react";
 import { Users, Languages, Award } from "lucide-react";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const instructeurs = content.instructeurs;
-
 export default function Instructeurs() {
+  const content = useContent();
+  const instructeurs = content.instructeurs;
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -48,13 +48,13 @@ export default function Instructeurs() {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0 }} className="text-center mb-14">
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
-            Ons team
+            {content.ui.sections.instructeurs}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Maak kennis met je instructeur
+            {content.ui.instructeurs.sectionHeading}
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Ervaren, geduldig en gecertificeerd. Jouw instructeur staat altijd voor je klaar.
+            {content.ui.instructeurs.sectionSubheading}
           </p>
         </div>
 
@@ -63,9 +63,9 @@ export default function Instructeurs() {
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
         >
-          {instructeurs.map((inst) => (
+          {instructeurs.map((inst, i) => (
             <div
-              key={inst.naam}
+              key={`${inst.naam}-${i}`}
               data-card
               style={{ opacity: 0 }}
               className="bg-slate-50 rounded-3xl border border-slate-100 p-8 hover:shadow-lg transition-all duration-300 hover:border-brand-100"
@@ -86,11 +86,11 @@ export default function Instructeurs() {
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <div className="bg-white rounded-xl p-3 text-center border border-slate-100">
                   <p className="text-xl font-bold text-slate-900">{inst.stats.leerlingen}</p>
-                  <p className="text-slate-400 text-xs mt-0.5">Leerlingen begeleid</p>
+                  <p className="text-slate-400 text-xs mt-0.5">{content.ui.instructeurs.leerlingen}</p>
                 </div>
                 <div className="bg-white rounded-xl p-3 text-center border border-slate-100">
                   <p className="text-xl font-bold text-brand-600">{inst.stats.slagingspercentage}</p>
-                  <p className="text-slate-400 text-xs mt-0.5">Slagingspercentage</p>
+                  <p className="text-slate-400 text-xs mt-0.5">{content.ui.instructeurs.slagingspercentage}</p>
                 </div>
               </div>
 
@@ -98,7 +98,7 @@ export default function Instructeurs() {
               <div className="mb-4">
                 <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium uppercase tracking-wide mb-2">
                   <Award className="w-3.5 h-3.5" />
-                  Specialisaties
+                  {content.ui.instructeurs.specialisaties}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {inst.specialisaties.map((s) => (
@@ -113,7 +113,7 @@ export default function Instructeurs() {
               <div>
                 <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium uppercase tracking-wide mb-2">
                   <Languages className="w-3.5 h-3.5" />
-                  Talen
+                  {content.ui.instructeurs.talen}
                 </div>
                 <p className="text-slate-600 text-sm">{inst.talen.join(" · ")}</p>
               </div>

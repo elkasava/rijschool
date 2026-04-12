@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { Analytics } from "@vercel/analytics/next";
+import { LanguageProvider } from "@/lib/LanguageContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -177,7 +178,9 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Ga naar hoofdinhoud
         </a>
-        <LazyMotion features={domAnimation}>{children}</LazyMotion>
+        <LanguageProvider>
+          <LazyMotion features={domAnimation}>{children}</LazyMotion>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

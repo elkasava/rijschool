@@ -3,13 +3,14 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Heart, Trophy, Zap, Shield, Clock, ThumbsUp, type LucideIcon } from "lucide-react";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
 
 const iconMap: Record<string, LucideIcon> = { Heart, Trophy, Zap, Shield, Clock, ThumbsUp };
-const voordelen = content.voordelen.map((v) => ({ ...v, icon: iconMap[v.icon] ?? Heart }));
 
 export default function Voordelen() {
+  const content = useContent();
+  const voordelen = content.voordelen.map((v) => ({ ...v, icon: iconMap[v.icon] ?? Heart }));
   const sectionRef = useRef<HTMLElement>(null);
   const headingLine1Ref = useRef<HTMLSpanElement>(null);
   const headingLine2Ref = useRef<HTMLSpanElement>(null);
@@ -89,15 +90,15 @@ export default function Voordelen() {
               style={{ opacity: 0 }}
               className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3"
             >
-              Waarom kiezen voor ons?
+              {content.ui.sections.voordelen}
             </span>
             <div className="overflow-hidden">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
                 <span ref={headingLine1Ref} style={{ opacity: 0, display: "block" }}>
-                  Alles voor
+                  {content.ui.voordelen.heading1}
                 </span>
                 <span ref={headingLine2Ref} style={{ opacity: 0, display: "block" }}>
-                  jouw succes
+                  {content.ui.voordelen.heading2}
                 </span>
               </h2>
             </div>
@@ -105,12 +106,8 @@ export default function Voordelen() {
           <p
             ref={subTextRef}
             style={{ opacity: 0 }}
-            className="text-slate-500 text-base lg:text-lg max-w-xs lg:text-right shrink-0"
-          >
-            Meer dan 2.000 leerlingen gingen je voor.
-            <br className="hidden lg:block" />
-            Dit is waarom ze voor ons kozen.
-          </p>
+            className="text-slate-500 text-base lg:text-lg max-w-xs lg:text-right shrink-0 hidden"
+          />
         </div>
 
         {/* Bento grid */}

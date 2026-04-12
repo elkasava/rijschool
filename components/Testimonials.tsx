@@ -2,12 +2,12 @@
 
 import { useRef, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const testimonials = content.testimonials;
-
 export default function Testimonials() {
+  const content = useContent();
+  const testimonials = content.testimonials;
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -48,23 +48,19 @@ export default function Testimonials() {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0 }} className="text-center mb-8 sm:mb-14">
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
-            Ervaringen
+            {content.ui.sections.testimonials}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Wat onze leerlingen zeggen
+            {content.ui.testimonials.heading}
           </h2>
-          <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Meer dan 2.000 tevreden leerlingen gingen je voor. Lees hun verhalen.
-          </p>
           {/* Overall rating summary */}
-          <div className="inline-flex items-center gap-3 mt-6 bg-white border border-slate-100 rounded-2xl px-6 py-3 shadow-sm">
+          <div className="inline-flex items-center gap-3 mt-4 bg-white border border-slate-100 rounded-2xl px-6 py-3 shadow-sm">
             <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((s) => (
                 <Star key={s} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
             </div>
             <span className="text-2xl font-bold text-slate-900">9.2</span>
-            <span className="text-slate-400 text-sm">op basis van 200+ beoordelingen</span>
           </div>
         </div>
 
@@ -73,9 +69,9 @@ export default function Testimonials() {
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {testimonials.map((t) => (
+          {testimonials.map((t, i) => (
             <div
-              key={t.naam}
+              key={`${t.naam}-${i}`}
               data-card
               style={{ opacity: 0 }}
               className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-100 transition-all duration-300 flex flex-col gap-4"

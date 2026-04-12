@@ -7,19 +7,20 @@ import { Menu, X, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import content from "@/data/content.json";
+import { useLanguage, useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const { schoolNaam, telefoon, telefoonLink, whatsapp } = content.algemeen;
-
-const navLinks = [
-  { label: "Pakketten", href: "#pakketten", isPage: false },
-  { label: "Reviews", href: "#reviews", isPage: false },
-  { label: "Online Praktijk", href: "/oefentheorie", isPage: true },
-  { label: "Contact", href: "#contact", isPage: false },
-];
-
 export default function Navbar() {
+  const { lang, setLang, content } = useLanguage();
+  const navContent = useContent();
+  const { schoolNaam, telefoon, telefoonLink, whatsapp } = content.algemeen;
+
+  const navLinks = [
+    { label: navContent.ui.nav.packages, href: "#pakketten", isPage: false },
+    { label: navContent.ui.nav.reviews, href: "#reviews", isPage: false },
+    { label: navContent.ui.nav.contact, href: "#contact", isPage: false },
+  ];
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -43,8 +44,8 @@ export default function Navbar() {
         { x: 0, opacity: 1 }
       );
 
-      // Nav items stagger in
-      const items = navItemsRef.current?.querySelectorAll("a, button");
+      // Nav items stagger in (links, buttons, divider, lang toggle wrapper)
+      const items = navItemsRef.current?.querySelectorAll("a, button, span[style], div[style]");
       if (items && items.length > 0) {
         tl.fromTo(
           items,
@@ -118,8 +119,8 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 navbar-header"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-        {/* 3-column grid: logo | nav (centered) | contact */}
-        <div className="grid grid-cols-3 items-center h-20">
+        {/* 3-column grid: logo | nav+lang (centered) | contact */}
+        <div className="grid grid-cols-3 items-center h-24">
           {/* Left: Logo */}
           <a
             ref={logoRef}
@@ -130,15 +131,15 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt={schoolNaam}
-              width={192}
-              height={48}
+              width={240}
+              height={60}
               priority
-              className="h-12 object-contain"
+              className="h-[60px] object-contain"
               style={{ width: "auto" }}
             />
           </a>
 
-          {/* Center: Desktop nav */}
+          {/* Center: Desktop nav + language toggle */}
           <nav
             ref={navItemsRef}
             className="hidden md:flex items-center justify-center gap-1"
@@ -149,7 +150,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   style={{ opacity: 0 }}
-                  className="px-4 py-2 text-slate-300 hover:text-white text-sm font-medium rounded-md hover:bg-white/10 transition-all duration-200 whitespace-nowrap"
+                  className="px-5 py-2 text-slate-300 hover:text-white text-base font-medium rounded-md hover:bg-white/10 transition-all duration-200 whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -158,12 +159,35 @@ export default function Navbar() {
                   key={link.href}
                   onClick={() => handleAnchorClick(link.href)}
                   style={{ opacity: 0 }}
-                  className="px-4 py-2 text-slate-300 hover:text-white text-sm font-medium rounded-md hover:bg-white/10 transition-all duration-200 whitespace-nowrap"
+                  className="px-5 py-2 text-slate-300 hover:text-white text-base font-medium rounded-md hover:bg-white/10 transition-all duration-200 whitespace-nowrap"
                 >
                   {link.label}
                 </button>
               )
             )}
+
+            {/* Divider */}
+            <span style={{ opacity: 0 }} className="w-px h-5 bg-white/20 mx-2" />
+
+            {/* Language toggle - desktop (centered with nav) */}
+            <div style={{ opacity: 0 }} className="flex items-center gap-0.5 bg-white/5 rounded-lg p-0.5 border border-white/10">
+              <button
+                onClick={() => setLang("nl")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                title="Wissel naar Nederlands"
+              >
+                <span className="text-base leading-none">🇳🇱</span>
+                <span>NL</span>
+              </button>
+              <button
+                onClick={() => setLang("en")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                title="Switch to English"
+              >
+                <span className="text-base leading-none">🇬🇧</span>
+                <span>EN</span>
+              </button>
+            </div>
           </nav>
 
           {/* Right: Phone + WhatsApp + Mobile toggle */}
@@ -196,7 +220,7 @@ export default function Navbar() {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Menu sluiten" : "Menu openen"}
+              aria-label={mobileOpen ? navContent.ui.nav.closeMenu : navContent.ui.nav.openMenu}
               aria-expanded={mobileOpen}
               className="md:hidden p-2 text-slate-300 hover:text-white rounded-md hover:bg-white/10 transition-colors"
             >
@@ -237,7 +261,7 @@ export default function Navbar() {
                   </button>
                 )
               )}
-              <div className="mt-3 pt-3 border-t border-slate-800 flex items-center gap-3 px-4">
+              <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between gap-3 px-4">
                 <a
                   href={`tel:${telefoonLink}`}
                   className="flex items-center gap-1.5 text-slate-300 hover:text-white text-sm transition-colors"
@@ -245,6 +269,25 @@ export default function Navbar() {
                   <Phone className="w-4 h-4" />
                   <span>{telefoon}</span>
                 </a>
+                {/* Language toggle - mobile */}
+                <div className="flex items-center gap-0.5 bg-white/5 rounded-lg p-0.5 border border-white/10">
+                  <button
+                    onClick={() => { setLang("nl"); setMobileOpen(false); }}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                    title="Wissel naar Nederlands"
+                  >
+                    <span className="text-base leading-none">🇳🇱</span>
+                    <span>NL</span>
+                  </button>
+                  <button
+                    onClick={() => { setLang("en"); setMobileOpen(false); }}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                    title="Switch to English"
+                  >
+                    <span className="text-base leading-none">🇬🇧</span>
+                    <span>EN</span>
+                  </button>
+                </div>
               </div>
             </div>
           </m.div>

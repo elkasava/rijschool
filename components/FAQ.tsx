@@ -10,12 +10,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MessageCircle } from "lucide-react";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const faqs = content.faq;
-
 export default function FAQ() {
+  const content = useContent();
+  const faqs = content.faq;
   const prefersReduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -103,20 +103,19 @@ export default function FAQ() {
             style={{ opacity: 0 }}
             className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3"
           >
-            Veelgestelde vragen
+            {content.ui.sections.faq}
           </span>
           <h2
             style={{ opacity: 0 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
           >
-            Jouw vragen, onze antwoorden
+            {content.ui.faq.heading}
           </h2>
           <p
             style={{ opacity: 0 }}
             className="text-slate-500 text-lg max-w-xl mx-auto"
           >
-            Staat jouw vraag er niet bij? Stuur ons dan een bericht via WhatsApp
-            — we antwoorden binnen een uur.
+            {content.ui.faq.notListed}
           </p>
         </div>
 
@@ -156,8 +155,8 @@ export default function FAQ() {
               <MessageCircle className="w-5 h-5 text-emerald-600" />
             </div>
             <div className="text-left">
-              <p className="text-slate-800 font-semibold text-sm">Nog een vraag?</p>
-              <p className="text-slate-400 text-xs">We reageren binnen een uur via WhatsApp</p>
+              <p className="text-slate-800 font-semibold text-sm">{content.ui.faq.stillQuestion}</p>
+              <p className="text-slate-400 text-xs">{content.ui.faq.replyTime}</p>
             </div>
             <m.a
               href={`https://wa.me/${content.algemeen.whatsapp}`}
@@ -168,7 +167,7 @@ export default function FAQ() {
               transition={scaleTap.transition}
               className="ml-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors whitespace-nowrap inline-block"
             >
-              App ons
+              {content.ui.faq.appButton}
             </m.a>
           </div>
         </div>

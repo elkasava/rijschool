@@ -6,7 +6,7 @@ import { Check, Sparkles, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lu
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import contentData from "@/data/content.json";
+import { useLanguage } from "@/lib/LanguageContext";
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
 import { cardLift, scaleTap } from "@/lib/motion-presets";
 
@@ -25,9 +25,6 @@ interface Pakket {
   accent?: string;
   cta: string;
 }
-
-const pakketten = contentData.pakketten as Pakket[];
-const losseTarieven = contentData.losseTarieven;
 
 /** Extract numeric value from a price string like "€599" or "€49,95" */
 function extractPrice(priceStr: string): number {
@@ -91,6 +88,10 @@ function PrijsCounter({ price }: { price: string }) {
 }
 
 export default function Pakketten() {
+  const { lang, content: contentData } = useLanguage();
+  const pakketten = contentData.pakketten as Pakket[];
+  const losseTarieven = contentData.losseTarieven;
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -138,10 +139,16 @@ export default function Pakketten() {
     return () => observer.disconnect();
   }, []);
 
-  // GSAP scroll-triggered animations
+  // GSAP scroll-triggered animations — re-runs on language change so new DOM nodes animate in
   useEffect(() => {
     if (typeof window === "undefined") return;
     registerGsap();
+
+    // Immediately hide elements before animation fires (replaces static style={{ opacity:0 }})
+    gsap.set(headerRef.current, { opacity: 0, y: 30 });
+    const cards = scrollRef.current?.querySelectorAll("[data-card]");
+    if (cards && cards.length > 0) gsap.set(cards, { opacity: 0, x: 60 });
+    gsap.set(tariefRef.current, { opacity: 0, y: 30 });
 
     const ctx = gsap.context(() => {
       // Header reveal
@@ -162,10 +169,10 @@ export default function Pakketten() {
       );
 
       // Cards slide in from right
-      const cards = scrollRef.current?.querySelectorAll("[data-card]");
-      if (cards && cards.length > 0) {
+      const animCards = scrollRef.current?.querySelectorAll("[data-card]");
+      if (animCards && animCards.length > 0) {
         gsap.fromTo(
-          cards,
+          animCards,
           { x: 60, opacity: 0 },
           {
             x: 0,
@@ -202,7 +209,8 @@ export default function Pakketten() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   const [tarievenOpen, setTarievenOpen] = useState(false);
   const prefersReduced = useReducedMotion();
@@ -228,18 +236,17 @@ export default function Pakketten() {
         {/* Header */}
         <div
           ref={headerRef}
-          style={{ opacity: 0 }}
           className="text-center mb-8 sm:mb-12"
         >
           <span className="inline-block text-brand-600 font-semibold text-sm uppercase tracking-widest mb-3">
-            Rijpakketten
+            {contentData.ui.sections.pakketten}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Kies jouw pakket
+            {contentData.ui.pakketten.heading}
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Transparante prijzen zonder verborgen kosten. Hoe meer lessen, hoe groter de korting.
-            Twijfel je? Neem contact op voor persoonlijk advies.
+            {contentData.ui.pakketten.subtext}{" "}
+            {contentData.ui.pakketten.advice}
           </p>
         </div>
 
@@ -249,7 +256,7 @@ export default function Pakketten() {
           <button
             onClick={() => slide("prev")}
             disabled={atStart}
-            aria-label="Vorige pakket"
+            aria-label={lang === "en" ? "Previous package" : "Vorige pakket"}
             className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 z-20 w-11 h-11 rounded-full shadow-lg border flex items-center justify-center transition-all duration-200 ${
               atStart
                 ? "bg-slate-100 border-slate-200 text-slate-300 cursor-not-allowed"
@@ -272,7 +279,6 @@ export default function Pakketten() {
                 <div
                   key={pakket.name}
                   data-card
-                  style={{ opacity: 0 }}
                   className="relative flex-none w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex pt-5"
                 >
                   {/* Badge */}
@@ -445,7 +451,7 @@ export default function Pakketten() {
                           href="/algemene-voorwaarden"
                           className="text-slate-400 hover:text-brand-600 text-[11px] underline underline-offset-2 transition-colors"
                         >
-                          Algemene voorwaarden
+                          {contentData.ui.pakketten2.termsLink}
                         </Link>
                       </p>
                     </div>
@@ -459,7 +465,7 @@ export default function Pakketten() {
           <button
             onClick={() => slide("next")}
             disabled={atEnd}
-            aria-label="Volgende pakket"
+            aria-label={lang === "en" ? "Next package" : "Volgende pakket"}
             className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 z-20 w-11 h-11 rounded-full shadow-lg border flex items-center justify-center transition-all duration-200 ${
               atEnd
                 ? "bg-slate-100 border-slate-200 text-slate-300 cursor-not-allowed"
@@ -492,7 +498,6 @@ export default function Pakketten() {
         {/* Losse tarieven */}
         <div
           ref={tariefRef}
-          style={{ opacity: 0 }}
           className="mt-10 sm:mt-16"
         >
           <div className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden">
@@ -503,9 +508,9 @@ export default function Pakketten() {
               aria-expanded={tarievenOpen}
             >
               <div>
-                <h3 className="text-slate-900 font-bold text-lg">Losse tarieven</h3>
+                <h3 className="text-slate-900 font-bold text-lg">{contentData.ui.pakketten.looseTarieven}</h3>
                 <p className="text-slate-500 text-sm mt-0.5">
-                  Individuele lessen, examens en toetsen — zonder pakket.
+                  {contentData.ui.pakketten.looseTarievenDesc}
                 </p>
               </div>
               <ChevronDown
@@ -514,9 +519,9 @@ export default function Pakketten() {
             </button>
             {/* Desktop: always-visible header */}
             <div className="hidden sm:block px-6 py-5 border-b border-slate-100">
-              <h3 className="text-slate-900 font-bold text-lg">Losse tarieven</h3>
+              <h3 className="text-slate-900 font-bold text-lg">{contentData.ui.pakketten.looseTarieven}</h3>
               <p className="text-slate-500 text-sm mt-0.5">
-                Individuele lessen, examens en toetsen — zonder pakket.
+                {contentData.ui.pakketten.looseTarievenDesc}
               </p>
             </div>
             <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 divide-x divide-y sm:divide-y-0 divide-slate-100 ${tarievenOpen ? "" : "hidden sm:grid"}`}>
@@ -541,12 +546,12 @@ export default function Pakketten() {
 
         {/* Bottom note */}
         <p className="text-center text-slate-400 text-sm mt-8">
-          Maatwerk mogelijk — neem contact op voor persoonlijk advies.{" "}
+          {contentData.ui.pakketten2.maatwerkAdvice}{" "}
           <Link
             href="/algemene-voorwaarden"
             className="underline underline-offset-2 hover:text-brand-600 transition-colors"
           >
-            Bekijk onze algemene voorwaarden
+            {contentData.ui.pakketten2.termsLink}
           </Link>
           .
         </p>

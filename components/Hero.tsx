@@ -3,15 +3,15 @@
 import { useEffect, useRef } from "react";
 import { m, useReducedMotion } from "framer-motion";
 import { scaleTap } from "@/lib/motion-presets";
-import { ArrowRight, Star, CheckCircle2, MapPin } from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import content from "@/data/content.json";
+import { useContent } from "@/lib/LanguageContext";
 import { registerGsap, gsap } from "@/lib/gsap";
 
-const { beoordeling, subtext, checkmarks } = content.hero;
-const { werkgebied } = content.algemeen;
-
 export default function Hero() {
+  const content = useContent();
+  const { subtext, checkmarks } = content.hero;
+  const { werkgebied } = content.algemeen;
   const videoRef = useRef<HTMLVideoElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -46,15 +46,9 @@ export default function Hero() {
         { y: 0, opacity: 1, duration: 0.6 }
       );
 
-      // Headline: split words and stagger reveal
+      // Headline reveal
       const headline = headlineRef.current;
       if (headline) {
-        // Wrap each word in a span (preserving gradient span)
-        const rawHTML = headline.innerHTML;
-        // We split on text nodes only — replace text content word-by-word
-        const words = headline.innerText.split(/\s+/);
-        // Rebuild with word spans — preserving the gradient span structure
-        // Instead: animate the whole h1 lines by treating it as two visual chunks
         gsap.fromTo(
           headline,
           { y: 40, opacity: 0 },
@@ -66,9 +60,6 @@ export default function Hero() {
             ease: "expoOut",
           }
         );
-        // Prevent TypeScript warning about unused vars
-        void rawHTML;
-        void words;
       }
 
       // Subtext
@@ -129,6 +120,7 @@ export default function Hero() {
         playsInline
         preload="none"
         poster="/polo.webp"
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ willChange: "transform" }}
       />
@@ -151,7 +143,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text content */}
           <div>
@@ -159,16 +151,13 @@ export default function Hero() {
             <div
               ref={badgeRef}
               style={{ opacity: 0 }}
-              className="inline-flex items-center gap-2 bg-brand-400/20 border border-brand-400/30 rounded-full px-4 py-1.5 mb-6"
+              className="inline-flex items-center gap-2.5 bg-white/8 border border-white/15 rounded-full px-4 py-1.5 mb-6"
             >
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <span className="text-slate-300 text-sm font-medium">
-                Beoordeeld met {beoordeling}
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
+              <span className="text-slate-300 text-sm font-medium">Amsterdam · Zaandam · Almere</span>
             </div>
 
             {/* Heading — GSAP animated */}
@@ -177,9 +166,9 @@ export default function Hero() {
               style={{ opacity: 0 }}
               className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6"
             >
-              Haal je rijbewijs{" "}
+              {content.ui.hero.heading1}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-200">
-                met zelfvertrouwen
+                {content.ui.hero.heading2}
               </span>
             </h1>
 
@@ -225,7 +214,7 @@ export default function Hero() {
                   onClick={() => scrollTo("#contact")}
                   className="bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-400/25 hover:shadow-brand-400/40 transition-all duration-300 group"
                 >
-                  Rijles Aanvragen
+                  {content.ui.hero.ctaPrimary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </m.div>
@@ -240,7 +229,7 @@ export default function Hero() {
                   onClick={() => scrollTo("#pakketten")}
                   className="border-slate-600 text-slate-300 hover:text-white hover:bg-white/10 hover:border-slate-500"
                 >
-                  Bekijk Pakketten
+                  {content.ui.hero.ctaSecondary}
                 </Button>
               </m.div>
             </div>
@@ -261,19 +250,18 @@ export default function Hero() {
                 className="relative border border-slate-700/80 rounded-3xl overflow-hidden p-6 flex flex-col gap-4"
                 style={{ backgroundImage: "url('/polo.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
               >
-                {/* Rating */}
-                <div className="bg-slate-900 rounded-2xl p-4 text-center">
-                  <div className="flex justify-center gap-1 mb-1.5">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <div className="text-4xl font-bold text-white">{beoordeling.split(" ")[0]}</div>
-                  <div className="text-slate-400 text-xs mt-0.5">Gemiddelde beoordeling</div>
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-2">
+                  {content.hero.stats.map((stat) => (
+                    <div key={stat.label} className="bg-white/90 backdrop-blur-sm rounded-2xl p-3 text-center border border-white/20">
+                      <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
+                      <div className="text-slate-700 text-xs mt-0.5 leading-tight">{stat.label}</div>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Areas */}
-                <div className="bg-slate-900 rounded-2xl px-4 py-3 flex flex-wrap gap-2">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl px-4 py-3 flex flex-wrap gap-2">
                   {werkgebied.split(", ").map((city) => (
                     <span key={city} className="flex items-center gap-1 px-2.5 py-1 bg-brand-600 rounded-full text-white text-xs font-medium">
                       <MapPin className="w-3 h-3" />{city.trim()}
@@ -281,17 +269,6 @@ export default function Hero() {
                   ))}
                 </div>
 
-                {/* Recent success */}
-                <div className="bg-slate-900 rounded-2xl px-4 py-3 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-emerald-400 text-xs font-semibold">Zojuist geslaagd!</p>
-                    <p className="text-slate-400 text-xs">Leerling in Amsterdam</p>
-                  </div>
-                  <div className="ml-auto text-slate-500 text-xs whitespace-nowrap">2u geleden</div>
-                </div>
               </div>
             </div>
           </div>
