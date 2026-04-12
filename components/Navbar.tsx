@@ -173,19 +173,17 @@ export default function Navbar() {
             <div style={{ opacity: 0 }} className="flex items-center gap-0.5 bg-white/5 rounded-lg p-0.5 border border-white/10">
               <button
                 onClick={() => setLang("nl")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
                 title="Wissel naar Nederlands"
               >
-                <span className="text-base leading-none">🇳🇱</span>
-                <span>NL</span>
+                NL
               </button>
               <button
                 onClick={() => setLang("en")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
                 title="Switch to English"
               >
-                <span className="text-base leading-none">🇬🇧</span>
-                <span>EN</span>
+                EN
               </button>
             </div>
           </nav>
@@ -273,19 +271,17 @@ export default function Navbar() {
                 <div className="flex items-center gap-0.5 bg-white/5 rounded-lg p-0.5 border border-white/10">
                   <button
                     onClick={() => { setLang("nl"); setMobileOpen(false); }}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "nl" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
                     title="Wissel naar Nederlands"
                   >
-                    <span className="text-base leading-none">🇳🇱</span>
-                    <span>NL</span>
+                    NL
                   </button>
                   <button
                     onClick={() => { setLang("en"); setMobileOpen(false); }}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
+                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all duration-200 ${lang === "en" ? "bg-white/15 text-white" : "text-slate-400 hover:text-slate-200"}`}
                     title="Switch to English"
                   >
-                    <span className="text-base leading-none">🇬🇧</span>
-                    <span>EN</span>
+                    EN
                   </button>
                 </div>
               </div>
