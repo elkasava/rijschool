@@ -53,15 +53,6 @@ export default function Testimonials() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             {content.ui.testimonials.heading}
           </h2>
-          {/* Overall rating summary */}
-          <div className="inline-flex items-center gap-3 mt-4 bg-white border border-slate-100 rounded-2xl px-6 py-3 shadow-sm">
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} className="w-5 h-5 fill-amber-400 text-amber-400" />
-              ))}
-            </div>
-            <span className="text-2xl font-bold text-slate-900">9.2</span>
-          </div>
         </div>
 
         {/* Grid */}
